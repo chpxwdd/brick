@@ -44,30 +44,17 @@ class Field extends Component {
 		const { width, height } = this.dimentions(cols, rows)
 
 		return (
-			<Stage width={width} height={height}>
-				{/* CUP */}
-				<Layer>
-					<Rect x={0} y={0} width={width} height={height} fill={FIELD_STROKE} />
-					<Rect
-						x={FIELD_BORDER}
-						y={FIELD_BORDER}
-						width={width - 2 * FIELD_BORDER}
-						height={height - 2 * FIELD_BORDER}
-						fill={FIELD_FILL}
-					/>
-				</Layer>
+			<Group width={width} height={height} />
 
-				{/* GRID FIELD */}
-				<Layer>
-					<Group x={2 * FIELD_BORDER} y={2 * FIELD_BORDER}>
-						{range(0, cols).map((dx, i) => {
-							return range(0, rows).map((dy, j) => {
-								return <Cell key={[i, j]} dx={dx} dy={dy} active={active} debug={debug} />
-							})
-						})}
-					</Group>
-				</Layer>
-			</Stage>
+			// <Layer>
+			// 	<Group x={2 * FIELD_BORDER} y={2 * FIELD_BORDER}>
+			// 		{range(0, cols).map((dx, i) => {
+			// 			return range(0, rows).map((dy, j) => {
+			// 				return <Cell key={[i, j]} dx={dx} dy={dy} active={active} debug={debug} />
+			// 			})
+			// 		})}
+			// 	</Group>
+			// </Layer>
 		)
 	}
 }

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
-import { Group, Rect } from 'react-konva'
+import { Group, Rect, Text } from 'react-konva'
 import { FIELD_CELL, FIELD_BORDER, FIELD_STROKE, FIELD_STROKE_ALT, FIELD_FILL } from '../../constants/field-constants'
 
 class Cell extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { active: false }
+		this.state = {
+			value: 0,
+			key: [0, 0],
+		}
 	}
 
 	render() {
@@ -20,15 +23,9 @@ class Cell extends Component {
 					height={FIELD_CELL - 2 * FIELD_BORDER}
 					fill={FIELD_FILL}
 					strokeWidth={FIELD_BORDER}
-					stroke={active ? FIELD_STROKE : FIELD_STROKE_ALT}
+					stroke={FIELD_STROKE}
 				/>
-				<Rect
-					x={FIELD_BORDER * 2}
-					y={FIELD_BORDER * 2}
-					width={FIELD_CELL - 4 * FIELD_BORDER}
-					height={FIELD_CELL - 4 * FIELD_BORDER}
-					fill={active ? FIELD_STROKE : FIELD_STROKE_ALT}
-				/>
+				<Text x={FIELD_CELL / 3.33} y={FIELD_CELL / 3.33} text={this.props.value} />
 			</Group>
 		)
 	}
