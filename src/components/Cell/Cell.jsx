@@ -25,7 +25,7 @@ class Cell extends Component {
 					strokeWidth={FIELD_BORDER}
 					stroke={FIELD_STROKE}
 				/>
-				<Text x={FIELD_CELL / 3.33} y={FIELD_CELL / 3.33} text={this.props.value} />
+				<Text x={FIELD_CELL / 3.33} y={FIELD_CELL / 3.33} text={this.props.status} />
 			</Group>
 		)
 	}

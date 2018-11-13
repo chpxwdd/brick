@@ -1,48 +1,65 @@
-export default (state = { status: '', speed: 0 }, { type, payload }) => {
+const initialState = {
+	speed: 0, // max 10
+	status: '', // 'ready'|'run'|'pause'|'continue'|'stop'
+	score: 0,
+	lines: 0,
+	currentShape: {},
+	nextShape: {},
+}
+
+export default function processReducer(state = initialState, { type, payload }) {
 	switch (type) {
 		case 'READY':
 			return {
 				...state,
-				speed: 0,
-				status: payload.status,
+				payload: { speed: 0, status: payload.status },
 			}
 		case 'RUN':
 			return {
 				...state,
-				speed: 1,
-				status: payload.status,
+				payload: {
+					speed: 1,
+					status: payload.status,
+				},
 			}
 		case 'PAUSE':
 			return {
 				...state,
-				speed: 0,
-				status: payload.status,
+				payload: {
+					speed: 0,
+					status: payload.status,
+				},
 			}
 		case 'CONTINUE':
 			return {
 				...state,
-				speed: payload.speed,
-				status: payload.status,
+				payload: {
+					speed: payload.speed,
+					status: payload.status,
+				},
 			}
 		case 'STOP':
 			return {
 				...state,
-				speed: 0,
-				status: payload.status,
+				payload: {
+					speed: 0,
+					status: payload.status,
+				},
 			}
 		case 'SPEED_UP':
 			return {
 				...state,
-				speed: payload.speed, // speed + 1,
-				// status: payload.status,
+				payload: {
+					speed: state.speed++,
+				},
 			}
 		case 'SPEED_DOWN':
 			return {
 				...state,
-				speed: payload.speed, // speed - 1,
-				// status: payload.status,
+				payload: {
+					speed: state.speed--,
+				},
 			}
-
 		default:
 			return state
 	}

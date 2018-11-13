@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import { default as control } from '../reducers/control-reducers.js'
+import processReducer from '../reducers/process-reducer.js'
+import boardReducer from '../reducers/board-reducer.js'
 
 export const rootReducer = combineReducers({
-	control,
+	process: processReducer,
+	board: boardReducer,
 })
