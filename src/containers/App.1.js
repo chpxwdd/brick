@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { range } from '../utils/utils'
+import { connect } from 'react-redux'
+import { readyProcessAction, runProcessAction } from '../actions/process-actions'
 
 class App extends Component {
 	constructor(props) {
@@ -7,10 +9,12 @@ class App extends Component {
 		this.state = {
 			status: false,
 		}
-		this.handleStart = this.handleStart.bind()
+		this.handleStart = this.handleStart.bind(this)
 	}
 
-	handleStart(event) {}
+	handleStart(event) {
+		this.props.runProcessAction('run')
+	}
 
 	render() {
 		return (

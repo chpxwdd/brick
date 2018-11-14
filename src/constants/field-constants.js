@@ -7,3 +7,8 @@ export const FIELD_FILL = '#a4b5af' // field backround
 export const FIELD_STROKE = '#3b4742' // border color for  visible/active cells
 export const FIELD_STROKE_ALT = '#8e9d97' // border color for  unvisible/unactive cells
 export const FIELD_MARGIN = FIELD_CELL
+
+export const DEGREE_0 = 0
+export const DEGREE_90 = 90
+export const DEGREE_180 = 180
+export const DEGREE_270 = 270

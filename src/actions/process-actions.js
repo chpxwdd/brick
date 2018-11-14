@@ -1,6 +1,18 @@
+import {
+	PROCESS_READY,
+	PROCESS_RUN,
+	PROCESS_PAUSE,
+	PROCESS_CONTINUE,
+	PROCESS_STOP,
+	PROCESS_DECELERATE,
+	PROCESS_ACCELERATE,
+	PROCESS_CHANGE_SPEED,
+	PROCESS_CHANGE_SCORE,
+} from '../constants/process-constants'
+
 const readyProcessAction = status => {
 	return {
-		type: 'READY',
+		type: PROCESS_READY,
 		payload: {
 			status: status,
 		},
@@ -8,7 +20,7 @@ const readyProcessAction = status => {
 }
 const runProcessAction = status => {
 	return {
-		type: 'RUN',
+		type: PROCESS_RUN,
 		payload: {
 			status: status,
 		},
@@ -17,7 +29,7 @@ const runProcessAction = status => {
 
 const pauseProcessAction = status => {
 	return {
-		type: 'PAUSE',
+		type: PROCESS_PAUSE,
 		payload: {
 			status: status,
 		},
@@ -26,7 +38,7 @@ const pauseProcessAction = status => {
 
 const continueProcessAction = status => {
 	return {
-		type: 'CONTINUE',
+		type: PROCESS_CONTINUE,
 		payload: {
 			status: status,
 		},
@@ -35,18 +47,45 @@ const continueProcessAction = status => {
 
 const stopProcessAction = status => {
 	return {
-		type: 'STOP',
+		type: PROCESS_STOP,
 		payload: {
 			status: status,
 		},
 	}
 }
 
-const speedUpProcessAction = speed => {
+const slowlyProcessAction = speed => {
 	return {
-		type: 'SPPED_UP',
+		type: PROCESS_DECELERATE,
+		payload: {
+			speed: speed--,
+		},
+	}
+}
+
+const fasterProcessAction = speed => {
+	return {
+		type: PROCESS_ACCELERATE,
+		payload: {
+			speed: speed++,
+		},
+	}
+}
+
+const changeSpeedAction = speed => {
+	return {
+		type: PROCESS_CHANGE_SPEED,
 		payload: {
 			speed: speed,
+		},
+	}
+}
+
+const changeScoreAction = score => {
+	return {
+		type: PROCESS_CHANGE_SCORE,
+		payload: {
+			score: score,
 		},
 	}
 }
