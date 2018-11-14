@@ -1,39 +1,53 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import {Button} from 'react-bootstrap'
-import {actionProcessReady, actionProcessRun, actionProcessPause, actionProcessStop, actionProcessContinue} from '../../actions/process-actions'
-
+import { PROCESS_READY } from '../../constants/process-constants'
+import {
+	actionProcessChangeSpeed,
+	actionProcessChangeStatus,
+	actionProcessChangeScore,
+} from '../../actions/process-actions'
+import Process from '../../components/Process'
 
 class ProcessContainer extends Component {
 	constructor(props) {
 		super(props)
 	}
 
-	render() {
-		const {
-			process, 
-			actionProcessReady,
-			actionProcessRun,
-			actionProcessPause,
-			actionProcessStop,
-			actionProcessContinue 
-		} = this.props
+	componentDidMount() {
+		this.props.actionProcessChangeStatus(PROCESS_READY)
+		this.props.actionProcessChangeSpeed(1)
+	}
 
-		return <div>
-			<Button onClick={}>Start</Button>
-		</div>
+	render() {
+		const { process, actionProcessChangeSpeed, actionProcessChangeScore, actionProcessChangeStatus } = this.props
+
+		return (
+			<div>
+				<Process
+					process={process}
+					actionProcessChangeSpeed={actionProcessChangeSpeed}
+					actionProcessChangeScore={actionProcessChangeScore}
+					actionProcessChangeStatus={actionProcessChangeStatus}
+				/>
+			</div>
+		)
 	}
 }
 
 const mapStateToProps = store => {
-	console.log(store)
 	return {
 		process: store.process,
 	}
 }
 
-const mapDispatchToProps = dispatch => ({})
+const mapDispatchToProps = dispatch => {
+	return {
+		actionProcessChangeSpeed: bindActionCreators(actionProcessChangeSpeed, dispatch),
+		actionProcessChangeStatus: bindActionCreators(actionProcessChangeStatus, dispatch),
+		actionProcessChangeScore: bindActionCreators(actionProcessChangeScore, dispatch),
+	}
+}
 
 export default connect(
 	mapStateToProps,

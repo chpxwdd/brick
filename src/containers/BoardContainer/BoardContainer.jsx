@@ -30,11 +30,13 @@ const mapStateToProps = store => {
 	}
 }
 
-const mapDispatchToProps = dispatch => ({
-	actionBoardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
-	actionBoardAddShape: bindActionCreators(actionBoardAddShape, dispatch),
-	actionBoardClearLine: bindActionCreators(actionBoardClearLine, dispatch),
-})
+const mapDispatchToProps = dispatch => {
+	return {
+		actionBoardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
+		actionBoardAddShape: bindActionCreators(actionBoardAddShape, dispatch),
+		actionBoardClearLine: bindActionCreators(actionBoardClearLine, dispatch),
+	}
+}
 
 export default connect(
 	mapStateToProps,
