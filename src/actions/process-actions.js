@@ -1,15 +1,4 @@
-import {
-	// PROCESS_READY,
-	// PROCESS_RUN,
-	// PROCESS_PAUSE,
-	// PROCESS_CONTINUE,
-	// PROCESS_STOP,
-	// PROCESS_DECELERATE,
-	// PROCESS_ACCELERATE,
-	PROCESS_CHANGE_STATUS,
-	PROCESS_CHANGE_SPEED,
-	PROCESS_CHANGE_SCORE,
-} from '../constants/process-constants'
+import { PROCESS_CHANGE_STATUS, PROCESS_CHANGE_SPEED, PROCESS_CHANGE_SCORE } from '../constants/process-constants'
 
 export const actionProcessChangeStatus = status => {
 	return {

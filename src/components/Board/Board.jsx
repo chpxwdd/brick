@@ -2,11 +2,7 @@ import React, { Component } from 'react'
 import { Group } from 'react-konva'
 import Cell from '../Cell'
 
-class Board extends Component {
-	constructor(props) {
-		super(props)
-	}
-
+class Display extends Component {
 	render() {
 		const { board } = this.props
 
@@ -30,4 +26,4 @@ class Board extends Component {
 	}
 }
 
-export default Board
+export default Display

@@ -10,10 +10,6 @@ import {
 import Process from '../../components/Process'
 
 class ProcessContainer extends Component {
-	constructor(props) {
-		super(props)
-	}
-
 	componentDidMount() {
 		this.props.actionProcessChangeStatus(PROCESS_READY)
 		this.props.actionProcessChangeSpeed(1)

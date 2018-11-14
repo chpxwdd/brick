@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Stage, Layer, Group } from 'react-konva'
+import { Group } from 'react-konva'
 import Cell from '../Cell'
 import { range } from '../../utils/utils'
 class Shape extends Component {
@@ -27,29 +27,23 @@ class Shape extends Component {
 				return []
 		}
 	}
-	render() {
+	renderShape() {
 		return (
-			<div>
-				<Stage width={80} height={80}>
-					<Layer>
-						<Group x={0} y={0}>
-							{range(0, 4).map((dx, i) => {
+			<Group x={0} y={0} width={80} height={80}>
+				{range(0, 4).map((dx, i) => {
+					return (
+						<Group key={i} x={0} y={0}>
+							{range(0, 4).map((dy, j) => {
 								return (
-									<Group key={i} x={0} y={0}>
-										{range(0, 4).map((dy, j) => {
-											return (
-												<Group key={j}>
-													<Cell dx={dx} dy={dy} status={0} debug={true} />
-												</Group>
-											)
-										})}
+									<Group key={j}>
+										<Cell dx={dx} dy={dy} status={0} debug={true} />
 									</Group>
 								)
 							})}
 						</Group>
-					</Layer>
-				</Stage>
-			</div>
+					)
+				})}
+			</Group>
 		)
 	}
 }
