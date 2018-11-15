@@ -20,16 +20,17 @@ class DisplayContainer extends Component {
 		return (
 			<div>
 				<Stage width={width} height={height}>
-					<Layer />
+					<Layer>
+						<Display
+							display={display}
+							// actionDisplayUpdateBoard={actionDisplayUpdateBoard}
+							// actionDisplayUpdateNextShape={actionDisplayUpdateNextShape}
+							// actionDisplayUpdateCurrentShape={actionDisplayUpdateCurrentShape}
+						/>
+						<BoardContainer />
+						<NextShapeContainer />
+					</Layer>
 				</Stage>
-				<BoardContainer />
-				<NextShapeContainer />
-				<Display
-					display={display}
-					// actionDisplayUpdateBoard={actionDisplayUpdateBoard}
-					// actionDisplayUpdateNextShape={actionDisplayUpdateNextShape}
-					// actionDisplayUpdateCurrentShape={actionDisplayUpdateCurrentShape}
-				/>
 			</div>
 		)
 	}
