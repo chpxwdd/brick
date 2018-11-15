@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux'
-import processReducer from '../reducers/process-reducer.js'
-import displayReducer from './display-reducer.js'
+import processReducer from './process-reducer.js'
+import nextShapeReducer from './next-shape-reducer'
+import boardReducer from './board-reducer'
+// import displayReducer from './display-reducer'
 
 export const rootReducer = combineReducers({
 	process: processReducer,
-	display: displayReducer,
+	nextShape: nextShapeReducer,
+	board: boardReducer,
+	// display: displayReducer,
 })

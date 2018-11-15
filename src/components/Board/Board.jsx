@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import GridLayout from '../GridLayout'
-import { DISPLAY_COLS, DISPLAY_ROWS, DISPLAY_MARGIN, DISPLAY_CELL } from '../../../constants/display-constants'
+import { DISPLAY_COLS, DISPLAY_ROWS, DISPLAY_MARGIN, DISPLAY_CELL } from '../../constants/display-constants'
 
 export default class Board extends Component {
 	constructor(props) {

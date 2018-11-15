@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import GridLayout from '../GridLayout'
-import Shape from '../../Shape'
+import Shape from '../Shape'
 import {
 	DISPLAY_COLS,
 	DISPLAY_ROWS,
 	DISPLAY_SHAPE_CELLS,
 	DISPLAY_MARGIN,
 	DISPLAY_CELL,
-} from '../../../constants/display-constants'
+} from '../../constants/display-constants'
 
 import { Group } from 'react-konva'
 
@@ -30,7 +30,7 @@ export default class NextShape extends Component {
 		return (
 			<Group>
 				<GridLayout {...this.state} />
-				<Shape dx={x} dy={y} figure="S" />
+				<Shape dx={x} dy={y} random={true} angle={0} figure="S" />
 			</Group>
 		)
 	}

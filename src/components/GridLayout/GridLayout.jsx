@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Group, Rect } from 'react-konva'
+import { Group, Rect, Text } from 'react-konva'
 import {
 	DISPLAY_BORDER,
 	DISPLAY_FILL,
 	DISPLAY_STROKE,
 	DISPLAY_STROKE_ALT,
 	DISPLAY_CELL,
-} from '../../../constants/display-constants'
-
-import { range } from '../../../utils/utils'
+} from '../../constants/display-constants'
+import { range } from '../../utils/utils'
 
 export default class GridLayout extends Component {
 	render() {
@@ -29,15 +28,18 @@ export default class GridLayout extends Component {
 				{range(0, rows).map((dy, i) => {
 					return range(0, cols).map((dx, j) => {
 						return (
-							<Rect
-								key={[i, j]}
-								x={dx * DISPLAY_CELL}
-								y={dy * DISPLAY_CELL}
-								width={DISPLAY_CELL}
-								height={DISPLAY_CELL}
-								stroke={DISPLAY_STROKE_ALT}
-								strokeWidth={DISPLAY_BORDER}
-							/>
+							<Group>
+								<Rect
+									key={[i, j]}
+									x={dx * DISPLAY_CELL}
+									y={dy * DISPLAY_CELL}
+									width={DISPLAY_CELL}
+									height={DISPLAY_CELL}
+									stroke={DISPLAY_STROKE_ALT}
+									strokeWidth={DISPLAY_BORDER}
+								/>
+								<Text x={dx * DISPLAY_CELL} y={dy * DISPLAY_CELL} />
+							</Group>
 						)
 					})
 				})}

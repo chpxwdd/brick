@@ -1,0 +1,1 @@
+export const NEXT_SHAPE_UPDATE = 'NEXT_SHAPE_UPDATE'

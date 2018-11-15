@@ -87,17 +87,17 @@ class Control extends Component {
 				<ButtonGroup bsSize="sm">
 					<Button
 						onClick={this.run}
-						disabled={process.status === PROCESS_RUN || process.status === PROCESS_PAUSE}
-						bsStyle="default"
-						// bsStyle={process.status === PROCESS_RUN ? 'success' : 'primary'}
+						disabled={process.status === PROCESS_PAUSE}
+						// bsStyle="default"
+						bsStyle={process.status === PROCESS_RUN ? 'success' : 'default'}
 					>
 						<Glyphicon glyph="play" />
 					</Button>
 					<Button
 						onClick={process.status === PROCESS_PAUSE ? this.continue : this.pause}
 						disabled={process.status === PROCESS_STOP}
-						bsStyle="default"
-						// bsStyle={process.status === PROCESS_PAUSE ? 'success' : 'default'}
+						// bsStyle="default"
+						bsStyle={process.status === PROCESS_PAUSE ? 'primary' : 'default'}
 					>
 						<Glyphicon glyph="pause" />
 					</Button>

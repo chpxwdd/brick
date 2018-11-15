@@ -17,9 +17,9 @@ import {
 
 import { range } from '../../utils/utils'
 import Shape from '../Shape'
-import GridLayout from './GridLayout'
-import Board from './Board'
-import NextShape from './NextShape'
+import GridLayout from '../GridLayout'
+import Board from '../Board'
+import NextShape from '../NextShape'
 
 class Display extends Component {
 	constructor(props) {
@@ -36,16 +36,12 @@ class Display extends Component {
 
 	render() {
 		const { width, height } = this.state
-		const { display } = this.props
+		const { board, nextShape, currentShape } = this.props
 		return (
 			<div className="Display">
-				<Stage width={width} height={height}>
-					<Layer>
-						<GridLayout {...this.state} />
-						<Board board={display.board} />
-						<NextShape nextShape={display.nextShape} />
-					</Layer>
-				</Stage>
+				<GridLayout {...this.state} />
+				<Board board={board} currentShape={currentShape} />
+				<NextShape nextShape={nextShape} />
 			</div>
 		)
 	}

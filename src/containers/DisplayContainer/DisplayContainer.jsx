@@ -18,12 +18,19 @@ class DisplayContainer extends Component {
 		} = this.props
 
 		return (
-			<Display
-				display={display}
-				actionDisplayUpdateBoard={actionDisplayUpdateBoard}
-				actionDisplayUpdateNextShape={actionDisplayUpdateNextShape}
-				actionDisplayUpdateCurrentShape={actionDisplayUpdateCurrentShape}
-			/>
+			<div>
+				<Stage width={width} height={height}>
+					<Layer />
+				</Stage>
+				<BoardContainer />
+				<NextShapeContainer />
+				<Display
+					display={display}
+					// actionDisplayUpdateBoard={actionDisplayUpdateBoard}
+					// actionDisplayUpdateNextShape={actionDisplayUpdateNextShape}
+					// actionDisplayUpdateCurrentShape={actionDisplayUpdateCurrentShape}
+				/>
+			</div>
 		)
 	}
 }

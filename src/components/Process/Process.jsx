@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Control from '../Control'
 import { Label } from 'react-bootstrap'
 import { PROCESS_RUN } from '../../constants/process-constants'
 
@@ -41,9 +40,6 @@ class Process extends Component {
 					</ul>
 				</div>
 				<hr />
-				<div className="Display">
-					<Control process={process} />
-				</div>
 			</div>
 		)
 	}
