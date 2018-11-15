@@ -5,7 +5,7 @@ export const range = (start, end) => {
 
 export const matrix = (cols, rows = null) => {
 	if (rows == null) {
-		const rows = cols
+		rows = cols
 	}
 	return range(0, cols).map((dx, i) => {
 		return range(0, rows).map((dy, j) => {

@@ -18,9 +18,11 @@ import { store } from '../../store/configureStore'
 class Control extends Component {
 	constructor(props) {
 		super(props)
+
 		this.state = {
 			allow: [PROCESS_READY],
 		}
+
 		this.ready = this.ready.bind(this)
 		this.run = this.run.bind(this)
 		this.pause = this.pause.bind(this)

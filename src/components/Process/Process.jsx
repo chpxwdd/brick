@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
-// import { PROCESS_RUN } from '../../constants/process-constants'
 import Control from '../Control'
 
 class Process extends Component {
-	constructor(props) {
-		super(props)
-	}
-
 	game() {}
 
 	render() {
-		const { process } = this.props
+		// const { process } = this.props
 
 		return (
 			<div>
