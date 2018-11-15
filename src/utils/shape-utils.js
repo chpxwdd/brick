@@ -1,5 +1,3 @@
-import { range, matrix } from './utils'
-
 export const emptyShape = [
 	[2, 2],
 	[1, 2],
@@ -43,6 +41,6 @@ export const shapeMatrix = shape => {
 		case 'J':
 			return [[1, 0], [-1, 0], [1, 1]]
 		default:
-			return []
+			return emptyShape
 	}
 }

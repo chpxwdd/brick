@@ -20,9 +20,9 @@ class Cell extends Component {
 					y={DISPLAY_BORDER}
 					width={DISPLAY_CELL - 2 * DISPLAY_BORDER}
 					height={DISPLAY_CELL - 2 * DISPLAY_BORDER}
-					fill={status ? DISPLAY_SHAPE_FILL : DISPLAY_FILL}
-					strokeWidth={DISPLAY_BORDER}
-					stroke={status === 0 ? DISPLAY_STROKE_ALT : DISPLAY_STROKE}
+					fill={status ? '#999' : null}
+					strokeWidth={status ? DISPLAY_STROKE_ALT : 0}
+					stroke={status ? DISPLAY_STROKE_ALT : null}
 				/>
 			</Group>
 		)

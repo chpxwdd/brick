@@ -9,9 +9,11 @@ import {
 } from '../constants/display-constants'
 
 const initialState = {
+	board: [],
 	currentShape: [],
-	nextShape: matrix(DISPLAY_COLS, DISPLAY_ROWS),
-	board: matrix(DISPLAY_SHAPE_CELLS),
+	nextShape: [],
+	// board: matrix(DISPLAY_COLS, DISPLAY_ROWS),
+	// nextShape: matrix(DISPLAY_SHAPE_CELLS, DISPLAY_SHAPE_CELLS),
 }
 
 export default function displayReducer(state = initialState, { type, payload }) {
