@@ -9,7 +9,7 @@ import {
 	DISPLAY_CELL,
 } from '../../../constants/display-constants'
 
-import { Layer, Group } from 'react-konva'
+import { Group } from 'react-konva'
 
 export default class NextShape extends Component {
 	constructor(props) {

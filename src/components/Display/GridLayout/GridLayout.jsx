@@ -13,7 +13,6 @@ import { range } from '../../../utils/utils'
 export default class GridLayout extends Component {
 	render() {
 		const { x, y, width, height, rows, cols } = this.props
-		// console.log({ ...this.state })
 		return (
 			<Group x={x} y={y} width={width} height={height}>
 				<Rect

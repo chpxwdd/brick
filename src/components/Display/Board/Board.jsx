@@ -18,7 +18,6 @@ export default class Board extends Component {
 
 	render() {
 		const { board } = this.props
-		console.log(board)
 		const { x, y, width, height, rows, cols } = this.state
 		return <GridLayout x={x} y={y} width={width} height={height} cols={cols} rows={rows} />
 	}

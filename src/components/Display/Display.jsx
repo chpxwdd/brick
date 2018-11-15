@@ -37,7 +37,6 @@ class Display extends Component {
 	render() {
 		const { width, height } = this.state
 		const { display } = this.props
-		console.log(this.props)
 		return (
 			<div className="Display">
 				<Stage width={width} height={height}>

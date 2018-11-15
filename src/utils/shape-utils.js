@@ -25,6 +25,7 @@ export const randomShape = shapeList => {
 }
 
 export const shapeMatrix = shape => {
+	console.log('shape', shape)
 	switch (shape) {
 		case 'I':
 			return [[0, -1], [0, 1], [0, 2]]
