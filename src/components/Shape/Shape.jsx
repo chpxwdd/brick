@@ -2,47 +2,56 @@ import React, { Component } from 'react'
 import { Group } from 'react-konva'
 import Cell from '../Cell'
 import { range } from '../../utils/utils'
+import { emptyShape, randomShape, shapeMatrix, shapeList } from '../../utils/shape-utils'
+import { DISPLAY_SHAPE_FILL, DISPLAY_SHAPE_CELLS } from '../../constants/display-constants'
 class Shape extends Component {
-	// skeleton = [[2, 2],[1, 2],[0, 2],[-1, 2],[2, 1],[1, 1],[0, 1],[-1, 1],[2, 0],[1, 0],[0, 0],[-1, 0],[2, -1],[1, -1],[0, -1],[-1, -1]]
-
-	/** MAIN  */
-	frame = []
-	shapes = shape => {
-		switch (shape) {
-			case 'I':
-				return [[0, -1], [0, 1], [0, 2]]
-			case 'O':
-				return [[0, 1], [1, 0], [1, 1]]
-			case 'T':
-				return [[0, 1], [1, 0], [-1, 0]]
-			case 'S':
-				return [[0, 1], [1, 0], [-1, 1]]
-			case 'Z':
-				return [[0, 1], [1, 1], [-1, 0]]
-			case 'L':
-				return [[1, 0], [-1, 0], [-1, -1]]
-			case 'J':
-				return [[1, 0], [-1, 0], [1, 1]]
-			default:
-				return []
+	constructor(props) {
+		super(props)
+		this.state = {
+			figure: '',
+			matrix: [],
+			fill: DISPLAY_SHAPE_FILL,
+			angle: 0,
+			dx: 0,
+			dy: 0,
 		}
 	}
-	renderShape() {
+
+	componentDidMount() {
+		const { dx, dy, angle } = this.props
+
+		const figure = randomShape(shapeList)
+
+		this.setState({
+			figure: figure,
+			matrix: shapeMatrix[figure],
+			dx: this.props.dx,
+			dy: this,
+		})
+		console.log(this.state)
+	}
+
+	render() {
+		const { matrix, figure } = this.state
+		const { dx, dy } = this.props
+
 		return (
-			<Group x={0} y={0} width={80} height={80}>
-				{range(0, 4).map((dx, i) => {
-					return (
-						<Group key={i} x={0} y={0}>
-							{range(0, 4).map((dy, j) => {
-								return (
-									<Group key={j}>
-										<Cell dx={dx} dy={dy} status={0} debug={true} />
-									</Group>
-								)
-							})}
-						</Group>
-					)
-				})}
+			<Group x={0} y={0}>
+				{matrix &&
+					matrix.forEach((row, i) => {
+						return (
+							<Group key={i} x={0} y={0}>
+								{row.map((col, j) => {
+									return (
+										<Group key={j}>
+											<Cell dx={i * dx} dy={j * dy} status={0} />
+										</Group>
+									)
+								})}
+							</Group>
+						)
+					})}
+				}
 			</Group>
 		)
 	}

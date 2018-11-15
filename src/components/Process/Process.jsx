@@ -1,24 +1,49 @@
 import React, { Component } from 'react'
 import Control from '../Control'
+import { Label } from 'react-bootstrap'
+import { PROCESS_RUN } from '../../constants/process-constants'
 
 class Process extends Component {
-	game() {}
+	componentDidMount() {
+		if (this.props.process.status === PROCESS_RUN) {
+			this.game()
+		}
+	}
+
+	game() {
+		const { process, display } = this.props
+		const { board } = this.props.display
+
+		let interval = process.speed * 500
+
+		setInterval({}, interval)
+	}
 
 	render() {
-		// const { process } = this.props
+		const { process } = this.props
 
 		return (
 			<div>
-				<Control />
+				<div className="Display">
+					<ul className="list-inline ">
+						<li>
+							<b>Score </b>
+							<Label>{process.score}</Label>
+						</li>
+						<li>
+							<b>Speed </b>
+							<Label>{process.speed}</Label>
+						</li>
+						<li>
+							<b>Lines </b>
+							<Label>{process.lines}</Label>
+						</li>
+					</ul>
+				</div>
 				<hr />
-				<dl className="dl-horizontal">
-					<dt>Scores</dt>
-					<dd>{process.score}</dd>
-					<dt>Speed</dt>
-					<dd>{process.speed}</dd>
-					<dt>Lines</dt>
-					<dd>{process.lines}</dd>
-				</dl>
+				<div className="Display">
+					<Control process={process} />
+				</div>
 			</div>
 		)
 	}

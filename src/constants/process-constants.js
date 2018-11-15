@@ -1,7 +1,5 @@
-export const PROCESS_READY = 'READY'
 export const PROCESS_RUN = 'RUN'
 export const PROCESS_PAUSE = 'PAUSE'
-export const PROCESS_CONTINUE = 'CONTINUE'
 export const PROCESS_STOP = 'STOP'
 export const PROCESS_CHANGE_SPEED = 'PROCESS_CHANGE_SPEED'
 export const PROCESS_CHANGE_SCORE = 'PROCESS_CHANGE_SCORE'

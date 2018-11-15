@@ -14,6 +14,7 @@ import {
 } from '../../constants/display-constants'
 
 import { range } from '../../utils/utils'
+import Shape from '../Shape/Shape'
 
 class Display extends Component {
 	display = {
@@ -34,22 +35,23 @@ class Display extends Component {
 		width: DISPLAY_SHAPE_CELLS * DISPLAY_CELL,
 		height: DISPLAY_SHAPE_CELLS * DISPLAY_CELL,
 	}
-	renderShape() {
+
+	renderField(x = 0, y = 0, width, height, rows = 0, cols = 0) {
 		return (
-			<Group x={this.nextShape.x} y={this.nextShape.y} width={this.nextShape.width} height={this.nextShape.height}>
+			<Group x={x} y={y} width={width} height={height}>
 				<Rect
 					x={-1 * DISPLAY_BORDER}
 					y={-1 * DISPLAY_BORDER}
-					width={this.nextShape.width + 2 * DISPLAY_BORDER}
-					height={this.nextShape.height + 2 * DISPLAY_BORDER}
+					width={width + 2 * DISPLAY_BORDER}
+					height={height + 2 * DISPLAY_BORDER}
 					fill={DISPLAY_FILL}
 					stroke={DISPLAY_STROKE}
 					strokeWidth={DISPLAY_BORDER}
 				/>
-				{range(0, DISPLAY_SHAPE_CELLS).map((dx, i) => {
+				{range(0, rows).map((dx, i) => {
 					return (
 						<Group key={i} x={0} y={0}>
-							{range(0, DISPLAY_SHAPE_CELLS).map((dy, j) => {
+							{range(0, cols).map((dy, j) => {
 								return (
 									<Group key={j} x={0} y={0}>
 										<Cell dx={dx} dy={dy} status={0} />
@@ -63,52 +65,36 @@ class Display extends Component {
 		)
 	}
 
-	renderBoard() {
-		return (
-			<Group x={this.board.x} y={this.board.y} width={this.board.width} height={this.board.height}>
-				<Rect
-					x={-1 * DISPLAY_BORDER}
-					y={-1 * DISPLAY_BORDER}
-					width={this.board.width + 2 * DISPLAY_BORDER}
-					height={this.board.height + 2 * DISPLAY_BORDER}
-					fill={DISPLAY_FILL}
-					stroke={DISPLAY_STROKE}
-					strokeWidth={DISPLAY_BORDER}
-				/>
-				{range(0, DISPLAY_ROWS).map((row, i) => {
-					return (
-						<Group key={i}>
-							{range(0, DISPLAY_COLS).map((col, j) => {
-								return (
-									<Group key={j}>
-										<Cell dx={col} dy={row} status={0} />
-									</Group>
-								)
-							})}
-						</Group>
-					)
-				})}
-			</Group>
-		)
-	}
 	render() {
-		// const { nextShape } = this.props
+		const { display } = this.props
 		return (
 			<div className="Display">
 				<Stage width={this.display.width} height={this.display.height}>
+					{/* STATIC VIEW */}
 					<Layer>
-						{/* <Rect
-							x={0}
-							y={0}
-							width={this.display.width}
-							height={this.display.height}
-							fill={DISPLAY_FILL}
-							stroke={DISPLAY_BORDER}
-							strokeWidth={DISPLAY_STROKE}
-						/> */}
-						{this.renderBoard()}
-						{this.renderShape()}
+						{this.renderField(0, 0, this.display.width, this.display.height)}
+						{this.renderField(
+							this.board.x,
+							this.board.y,
+							this.board.width,
+							this.board.height,
+							DISPLAY_COLS,
+							DISPLAY_ROWS
+						)}
+						{this.renderField(
+							this.nextShape.x,
+							this.nextShape.y,
+							this.nextShape.width,
+							this.nextShape.height,
+							DISPLAY_SHAPE_CELLS,
+							DISPLAY_SHAPE_CELLS
+						)}
 					</Layer>
+					{/* DINAMIC */}
+					<Layer>
+						<Shape dx={3} dy={5} angle={0} />
+					</Layer>
+					<Layer>{/* BOARD RENDER VALUES */}</Layer>
 				</Stage>
 			</div>
 		)

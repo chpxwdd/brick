@@ -1,18 +1,17 @@
 import React, { Component } from 'react'
-import { Button, ButtonGroup } from 'react-bootstrap'
+import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import {
 	actionProcessChangeStatus,
 	actionProcessChangeScore,
 	actionProcessChangeSpeed,
 } from '../../actions/process-actions'
-import { actionDisplayUpdate, actionDisplayAddShape, actionDisplayClearLine } from '../../actions/display-actions'
 import {
-	PROCESS_RUN,
-	PROCESS_STOP,
-	PROCESS_CONTINUE,
-	PROCESS_PAUSE,
-	PROCESS_READY,
-} from '../../constants/process-constants'
+	actionDisplayUpdateBoard,
+	actionDisplayUpdateNextShape,
+	actionDisplayUpdateCurrentShape,
+} from '../../actions/display-actions'
+
+import { PROCESS_RUN, PROCESS_STOP, PROCESS_PAUSE } from '../../constants/process-constants'
 import { store } from '../../store/configureStore'
 
 class Control extends Component {
@@ -20,10 +19,9 @@ class Control extends Component {
 		super(props)
 
 		this.state = {
-			allow: [PROCESS_READY],
+			allowActions: [],
 		}
 
-		this.ready = this.ready.bind(this)
 		this.run = this.run.bind(this)
 		this.pause = this.pause.bind(this)
 		this.continue = this.continue.bind(this)
@@ -31,32 +29,52 @@ class Control extends Component {
 	}
 
 	componentDidMount() {
-		this.ready()
+		this.setState({ allowActions: this.actionsAllow(this.props.status) })
 	}
 
-	ready = () => {
-		store.dispatch(actionProcessChangeStatus(PROCESS_READY))
-	}
+	run = () => {
+		// currentShape
+		// let shape = randomShape()
+		// store.dispatch(actionDisplayAddShape(shape))
 
-	run() {
+		// nextShape
+
+		// меняем статус
+		// меняем статус
+
+		// меняем статус
+		store.dispatch(actionProcessChangeSpeed(1))
 		store.dispatch(actionProcessChangeStatus(PROCESS_RUN))
 	}
 
-	pause() {
+	pause = () => {
 		store.dispatch(actionProcessChangeStatus(PROCESS_PAUSE))
 	}
 
-	continue() {
-		store.dispatch(actionProcessChangeStatus(PROCESS_CONTINUE))
+	continue = () => {
+		store.dispatch(actionProcessChangeStatus(PROCESS_RUN))
 	}
 
-	stop() {
+	stop = () => {
 		store.dispatch(actionProcessChangeStatus(PROCESS_STOP))
 	}
 
-	availableActions = process => {
-		switch (process) {
-			case '':
+	move = direction => {
+		// store.dispatch(actionDisplayUpdateBoard(board))
+	}
+
+	rotate = (direction, angle) => {
+		// store.dispatch(actionDisplayUpdateBoard(board))
+	}
+
+	actionsAllow = status => {
+		switch (status) {
+			case PROCESS_RUN:
+				return [PROCESS_PAUSE, PROCESS_STOP]
+			case PROCESS_STOP:
+				return [PROCESS_RUN]
+			case PROCESS_PAUSE:
+				return [PROCESS_STOP]
 			default:
 				return [PROCESS_RUN]
 		}
@@ -64,18 +82,33 @@ class Control extends Component {
 
 	render() {
 		const { process } = this.props
-
 		return (
 			<div>
 				<ButtonGroup bsSize="sm">
 					<Button
-						onClick={() => {
-							store.dispatch(actionProcessChangeStatus(PROCESS_RUN))
-						}}
+						onClick={this.run}
+						disabled={process.status === PROCESS_RUN || process.status === PROCESS_PAUSE}
+						bsStyle="default"
+						// bsStyle={process.status === PROCESS_RUN ? 'success' : 'primary'}
 					>
-						Run
+						<Glyphicon glyph="play" />
 					</Button>
-					<Button>Stop</Button>
+					<Button
+						onClick={process.status === PROCESS_PAUSE ? this.continue : this.pause}
+						disabled={process.status === PROCESS_STOP}
+						bsStyle="default"
+						// bsStyle={process.status === PROCESS_PAUSE ? 'success' : 'default'}
+					>
+						<Glyphicon glyph="pause" />
+					</Button>
+					<Button
+						onClick={this.stop}
+						disabled={process.status === PROCESS_STOP}
+						bsStyle="default"
+						// bsStyle={process.status === PROCESS_PAUSE ? 'default' : 'danger'}
+					>
+						<Glyphicon glyph="stop" />
+					</Button>
 				</ButtonGroup>
 			</div>
 		)

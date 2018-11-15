@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { PROCESS_READY } from '../../constants/process-constants'
 import {
 	actionProcessChangeSpeed,
 	actionProcessChangeStatus,
@@ -10,11 +9,6 @@ import {
 import Process from '../../components/Process'
 
 class ProcessContainer extends Component {
-	componentDidMount() {
-		this.props.actionProcessChangeStatus(PROCESS_READY)
-		this.props.actionProcessChangeSpeed(1)
-	}
-
 	render() {
 		const { process, actionProcessChangeSpeed, actionProcessChangeScore, actionProcessChangeStatus } = this.props
 

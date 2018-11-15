@@ -1,28 +1,37 @@
 import { PROCESS_CHANGE_STATUS, PROCESS_CHANGE_SPEED, PROCESS_CHANGE_SCORE } from '../constants/process-constants'
 
-export const actionProcessChangeStatus = status => {
+export const actionProcessChangeStatus = newValue => {
 	return {
 		type: PROCESS_CHANGE_STATUS,
 		payload: {
-			status: status,
+			status: newValue,
 		},
 	}
 }
 
-export const actionProcessChangeSpeed = speed => {
+export const actionProcessChangeSpeed = newValue => {
 	return {
 		type: PROCESS_CHANGE_SPEED,
 		payload: {
-			speed: speed,
+			speed: newValue,
 		},
 	}
 }
 
-export const actionProcessChangeScore = score => {
+export const actionProcessChangeScore = newValue => {
 	return {
 		type: PROCESS_CHANGE_SCORE,
 		payload: {
-			score: score,
+			score: newValue,
+		},
+	}
+}
+
+export const actionProcessChangeActionAllow = newValue => {
+	return {
+		type: PROCESS_CHANGE_SCORE,
+		payload: {
+			actionAllow: newValue,
 		},
 	}
 }

@@ -2,15 +2,14 @@ import {
 	PROCESS_CHANGE_SCORE,
 	PROCESS_CHANGE_SPEED,
 	PROCESS_CHANGE_STATUS,
-	PROCESS_READY,
+	PROCESS_STOP,
 } from '../constants/process-constants'
 
 const initialState = {
-	speed: 0, // max 10
-	status: '', // 'ready'|'run'|'pause'|'continue'|'stop'
+	speed: 0,
+	status: PROCESS_STOP,
 	score: 0,
 	lines: 0,
-	actionAllow: PROCESS_READY,
 }
 
 export default function processReducer(state = initialState, { type, payload }) {
@@ -30,12 +29,6 @@ export default function processReducer(state = initialState, { type, payload }) 
 			return {
 				...state,
 				score: payload.score,
-			}
-
-		case PROCESS_CHANGE_ACTION_ALLOW:
-			return {
-				...state,
-				actionAllow: payload.actionAllow,
 			}
 
 		default:
