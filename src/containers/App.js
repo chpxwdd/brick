@@ -9,7 +9,7 @@ class App extends Component {
 			<div className="Game">
 				<Grid>
 					<Row>
-						<div className="Dispaly">
+						<div className="Display">
 							<DisplayContainer />
 							<hr />
 							<ProcessContainer />
