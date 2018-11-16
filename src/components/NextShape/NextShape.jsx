@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import GridLayout from '../GridLayout'
 import Shape from '../Shape'
 import { SHAPE_CELLS, CELL } from '../../constants/dimention-constants'
 
@@ -11,10 +10,10 @@ export default class NextShape extends Component {
 	}
 
 	render() {
-		const { x, y, figure, matrix } = this.props.nextShape
+		const { dx, dy, matrix } = this.props.nextShape
 		return (
 			<Group x={0} y={0}>
-				<Shape dx={x} dy={y} figure={this.props.figure} />
+				<Shape dx={dx} dy={dy} matrix={matrix} />
 			</Group>
 		)
 	}

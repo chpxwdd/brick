@@ -5,15 +5,21 @@ import { Group } from 'react-konva'
 import Board from '../../components/Board'
 import CurrentShape from '../../components/CurrentShape'
 import { MARGIN } from '../../constants/dimention-constants'
+import { actionBoardUpdate } from '../../actions/board-actions'
+import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
 
 class BoardContainer extends Component {
 	render() {
-		const { board, currentShape } = this.props
+		const { board, currentShape, actionCurrentShapeUpdate, actionBoardUpdate } = this.props
 
 		return (
 			<Group x={MARGIN} y={MARGIN}>
 				<Board board={board} />
-				{/* <CurrentShape currentShape={currentShape} /> */}
+				<CurrentShape
+					currentShape={currentShape}
+					actionCurrentShapeUpdate={actionCurrentShapeUpdate}
+					actionBoardUpdate={actionBoardUpdate}
+				/>
 			</Group>
 		)
 	}
@@ -28,7 +34,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// actionDisplayUpdateBoard: bindActionCreators(actionDisplayUpdateBoard, dispatch),
+		actionBoardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
+		actionCurrentShapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
 	}
 }
 

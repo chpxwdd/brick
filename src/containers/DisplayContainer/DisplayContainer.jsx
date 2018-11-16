@@ -1,20 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Stage, Layer, Group } from 'react-konva'
-// import {
-// 	actionDisplayUpdateBoard,
-// 	actionDisplayUpdateNextShape,
-// 	actionDisplayUpdateCurrentShape,
-// } from '../../actions/display-actions'
-import {
-	DISPLAY_COLS,
-	DISPLAY_ROWS,
-	DISPLAY_CELL,
-	DISPLAY_SHAPE_CELLS,
-	DISPLAY_MARGIN,
-} from '../../constants/display-constants'
-import { COLS, ROWS, CELL, MARGIN, SHAPE_CELLS } from '../../constants/dimention-constants'
+import { Stage, Layer } from 'react-konva'
+import { COLS, ROWS, CELL, SHAPE_CELLS, MARGIN } from '../../constants/dimention-constants'
 
 import BoardContainer from '../../containers/BoardContainer'
 import NextShapeContainer from '../../containers/NextShapeContainer'

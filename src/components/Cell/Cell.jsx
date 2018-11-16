@@ -1,28 +1,30 @@
 import React, { Component } from 'react'
 import { Group, Rect, Text } from 'react-konva'
 import {
-	DISPLAY_CELL,
-	DISPLAY_BORDER,
-	DISPLAY_STROKE,
-	DISPLAY_STROKE_ALT,
-	DISPLAY_FILL,
-	DISPLAY_SHAPE_FILL,
-} from '../../constants/display-constants'
+	CELL,
+	BORDER,
+	STROKE_WIDTH,
+	STROKE_LIGHT,
+	STROKE_DARK,
+	FILL,
+	FILL_LIGHT,
+	FILL_DARK,
+} from '../../constants/dimention-constants'
 
 class Cell extends Component {
 	render() {
 		const { dx, dy, status } = this.props
 
 		return (
-			<Group x={dx * DISPLAY_CELL} y={dy * DISPLAY_CELL}>
+			<Group x={dx * CELL} y={dy * CELL}>
 				<Rect
-					x={DISPLAY_BORDER}
-					y={DISPLAY_BORDER}
-					width={DISPLAY_CELL - 2 * DISPLAY_BORDER}
-					height={DISPLAY_CELL - 2 * DISPLAY_BORDER}
-					fill={status ? '#999' : null}
-					strokeWidth={status ? DISPLAY_STROKE_ALT : 0}
-					stroke={status ? DISPLAY_STROKE_ALT : null}
+					x={BORDER}
+					y={BORDER}
+					width={CELL - 2 * BORDER}
+					height={CELL - 2 * BORDER}
+					fill={status ? FILL_DARK : null}
+					strokeWidth={status ? STROKE_WIDTH : 0}
+					stroke={status ? STROKE_DARK : null}
 				/>
 			</Group>
 		)
