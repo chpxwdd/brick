@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Group, Rect, Text } from 'react-konva'
-import { CELL, BORDER, STROKE_WIDTH, COLOR, LIGHT, DARK } from '../../constants/dimention-constants'
+import { CELL, BORDER, STROKE_WIDTH, COLOR, DARK } from '../../constants/dimention-constants'
 
 class Cell extends Component {
 	render() {
 		const { dx, dy, status } = this.props
-
+		console.log(status)
 		return (
 			<Group x={dx * CELL} y={dy * CELL}>
 				<Rect
@@ -26,6 +26,7 @@ class Cell extends Component {
 					strokeWidth={status ? STROKE_WIDTH / 2 : 0}
 					stroke={status ? COLOR : null}
 				/>
+				<Text x={CELL / 3.3} y={CELL / 3.3} text={String(status)} fontSize={8} />
 			</Group>
 		)
 	}

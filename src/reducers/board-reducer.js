@@ -3,8 +3,7 @@ import { range } from '../utils/utils'
 import { ROWS, COLS } from '../constants/dimention-constants'
 const initialState = range(0, ROWS).map(() => {
 	return range(0, COLS).map(() => {
-		// return 1
-		return Math.floor(Math.random() * 2)
+		return 0
 	})
 })
 export default function boardReducer(state = initialState, { type, payload }) {

@@ -6,7 +6,7 @@ import {
 	PROCESS_UPDATE_STATUS,
 } from '../constants/process-constants'
 
-import { RUN, STOP, PAUSE } from '../constants/control-constants'
+import { STOP } from '../constants/control-constants'
 
 const initialState = {
 	speed: 0,

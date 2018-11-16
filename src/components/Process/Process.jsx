@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon, Label } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/control-constants'
-import { ROWS, COLS } from '../../constants/dimention-constants'
-// import { moveShape, rotateShape, shapeMatrix, shapeList } from '../../utils/shape-utils'
+// import { moveShape, rotateShape, shapeMatrix, shapeList, randomShape } from '../../utils/shape-utils'
+import { shapeList, randomShape } from '../../utils/shape-utils'
 // import { boardCheckShapePosition, boardCombineShape, boardDropLine } from '../../utils/board-utils'
 
 class Process extends Component {
@@ -15,11 +15,11 @@ class Process extends Component {
 		this.stop = this.stop.bind(this)
 	}
 
-	componentDidMount() {
-		if (this.props.process.status === RUN) {
-			this.game()
-		}
-	}
+	// componentDidMount() {
+	// 	if (this.props.process.status === RUN) {
+	// 		this.game()
+	// 	}
+	// }
 
 	run = () => {
 		// currentShape
@@ -35,6 +35,7 @@ class Process extends Component {
 		// this.props.boardUpdate({ board: boardMatrix(ROWS, COLS) })
 		this.props.updateSpeed(1)
 		this.props.updateStatus(RUN)
+		this.game()
 		// store.dispatch(actionProcessUpdateSpeed(1))
 		// store.dispatch(actionProcessUpdateStatus(RUN))
 	}
@@ -57,10 +58,15 @@ class Process extends Component {
 	rotate = (direction, angle) => {}
 
 	game() {
-		const { process, board, currentShape, nextShape } = this.props
-		let interval = process.speed * 500
+		// const { process, board, currentShape, nextShape } = this.props
+		// const { process, currentShape, nextShape } = this.props
 
-		setInterval({}, interval)
+		const _nsAlias = randomShape(shapeList)
+		console.log(_nsAlias)
+		let interval = 100
+		if (this.props.process.status == RUN) {
+			setInterval({}, interval)
+		}
 	}
 
 	render() {

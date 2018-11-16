@@ -3,9 +3,9 @@ import {
 	ROTATE_90,
 	ROTATE_180,
 	ROTATE_270,
-	MOVE_DOWN,
-	MOVE_RIGHT,
-	MOVE_LEFT,
+	// MOVE_DOWN,
+	// MOVE_RIGHT,
+	// MOVE_LEFT,
 } from '../constants/control-constants'
 
 export const shapeList = ['I', '0', 'T', 'S', 'Z', 'L', 'J']
