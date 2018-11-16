@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
-import { PROCESS_RUN, PROCESS_STOP, PROCESS_PAUSE } from '../../constants/process-constants'
-import { moveShape, rotateShape, shapeMatrix, shapeList } from '../../utils/shape-utils'
+import { RUN, STOP, PAUSE } from '../../constants/control-constants'
+// import { moveShape, rotateShape, shapeMatrix, shapeList } from '../../utils/shape-utils'
+import { boardMatrix, boardCheckShapePosition, boardCombineShape, boardDropLine } from '../../utils/board-utils'
 
 class Control extends Component {
 	constructor(props) {
@@ -13,22 +14,14 @@ class Control extends Component {
 		this.stop = this.stop.bind(this)
 	}
 
-	run = () => {
-		const {
-			process,
-			board,
-			currentShape,
-			nextShape,
-			actionProcessChangeSpeed,
-			actionProcessChangeScore,
-			actionProcessChangeStatus,
-			actionNextShapeUpdate,
-			actionCurrentShapeUpdate,
-			actionBoardUpdate,
-		} = this.props
+	componentDidMount() {}
 
+	run = () => {
+		const _tp = this.props
 		// currentShape
+
 		// let shape = randomShape()
+		_tp.actionBoardUpdate()
 		// store.dispatch(actionDisplayAddShape(shape))
 
 		// nextShape
@@ -38,30 +31,31 @@ class Control extends Component {
 
 		// меняем статус
 
-		actionProcessChangeSpeed(1)
-		actionProcessChangeStatus(PROCESS_RUN)
-		// store.dispatch(actionProcessChangeSpeed(1))
-		// store.dispatch(actionProcessChangeStatus(PROCESS_RUN))
+		_tp.boardUpdate()
+		_tp.updateSpeed(1)
+		_tp.updateStatus(RUN)
+		// store.dispatch(updateSpeed(1))
+		// store.dispatch(updateStatus(RUN))
 	}
 
 	pause = () => {
-		this.props.actionProcessChangeStatus(PROCESS_PAUSE)
+		this.props.updateStatus(PAUSE)
 	}
 
 	continue = () => {
-		this.props.actionProcessChangeStatus(PROCESS_RUN)
+		this.props.updateStatus(RUN)
 	}
 
 	stop = () => {
-		this.props.actionProcessChangeStatus(PROCESS_STOP)
+		this.props.updateStatus(STOP)
 	}
 
 	move = direction => {
-		// actionDisplayUpdateBoard(board)
+		// updateBoard(board)
 	}
 
 	rotate = (direction, angle) => {
-		// actionDisplayUpdateBoard(board)
+		// updateBoard(board)
 	}
 
 	render() {
@@ -71,19 +65,19 @@ class Control extends Component {
 				<ButtonGroup bsSize="sm">
 					<Button
 						onClick={this.run}
-						disabled={process.status === PROCESS_PAUSE}
-						bsStyle={process.status === PROCESS_RUN ? 'success' : 'default'}
+						disabled={process.status === PAUSE}
+						bsStyle={process.status === RUN ? 'success' : 'default'}
 					>
 						<Glyphicon glyph="play" />
 					</Button>
 					<Button
-						onClick={process.status === PROCESS_PAUSE ? this.continue : this.pause}
-						disabled={process.status === PROCESS_STOP}
-						bsStyle={process.status === PROCESS_PAUSE ? 'primary' : 'default'}
+						onClick={process.status === PAUSE ? this.continue : this.pause}
+						disabled={process.status === STOP}
+						bsStyle={process.status === PAUSE ? 'primary' : 'default'}
 					>
 						<Glyphicon glyph="pause" />
 					</Button>
-					<Button onClick={this.stop} disabled={process.status === PROCESS_STOP} bsStyle="default">
+					<Button onClick={this.stop} disabled={process.status === STOP} bsStyle="default">
 						<Glyphicon glyph="stop" />
 					</Button>
 				</ButtonGroup>

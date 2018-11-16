@@ -1,6 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import { Stage, Layer } from 'react-konva'
 import { COLS, ROWS, CELL, SHAPE_CELLS, MARGIN } from '../../constants/dimention-constants'
 
@@ -30,19 +28,4 @@ class DisplayContainer extends Component {
 	}
 }
 
-const mapStateToProps = store => {
-	return {
-		// process: store.process,
-	}
-}
-
-const mapDispatchToProps = dispatch => {
-	return {
-		// actionDisplayUpdateBoard: bindActionCreators(actionDisplayUpdateBoard, dispatch),
-	}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(DisplayContainer)
+export default DisplayContainer

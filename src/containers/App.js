@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
 import { Grid, Row } from 'react-bootstrap'
-import { Stage, Layer } from 'react-konva'
-// import DisplayContainer from '../containers/DisplayContainer'
 import ProcessContainer from '../containers/ProcessContainer'
-import BoardContainer from '../containers/BoardContainer'
-import NextShapeContainer from '../containers/NextShapeContainer'
-import '../index.css'
 import DisplayContainer from './DisplayContainer/DisplayContainer'
+import '../index.css'
 class App extends Component {
 	render() {
 		return (
 			<div className="Game">
 				<Grid>
 					<Row>
-						<DisplayContainer />
-						<hr />
-						<ProcessContainer />
+						<div className="Dispaly">
+							<DisplayContainer />
+							<hr />
+							<ProcessContainer />
+						</div>
 					</Row>
 				</Grid>
 			</div>

@@ -10,16 +10,12 @@ import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
 
 class BoardContainer extends Component {
 	render() {
-		const { board, currentShape, actionCurrentShapeUpdate, actionBoardUpdate } = this.props
+		const { board, currentShape, currentShapeUpdate, boardUpdate } = this.props
 
 		return (
 			<Group x={MARGIN} y={MARGIN}>
 				<Board board={board} />
-				<CurrentShape
-					currentShape={currentShape}
-					actionCurrentShapeUpdate={actionCurrentShapeUpdate}
-					actionBoardUpdate={actionBoardUpdate}
-				/>
+				<CurrentShape currentShape={currentShape} currentShapeUpdate={currentShapeUpdate} boardUpdate={boardUpdate} />
 			</Group>
 		)
 	}
@@ -34,8 +30,8 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		actionBoardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
-		actionCurrentShapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
+		boardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
+		shapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
 	}
 }
 
