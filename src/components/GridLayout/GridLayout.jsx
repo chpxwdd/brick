@@ -1,12 +1,6 @@
 import React, { Component } from 'react'
 import { Group, Rect, Text } from 'react-konva'
-import {
-	DISPLAY_BORDER,
-	DISPLAY_FILL,
-	DISPLAY_STROKE,
-	DISPLAY_STROKE_ALT,
-	DISPLAY_CELL,
-} from '../../constants/display-constants'
+import { BORDER, FILL, STROKE_LIGHT, STROKE_DARK, CELL, STROKE_WIDTH } from '../../constants/dimention-constants'
 import { range } from '../../utils/utils'
 
 export default class GridLayout extends Component {
@@ -15,13 +9,13 @@ export default class GridLayout extends Component {
 		return (
 			<Group x={x} y={y} width={width} height={height}>
 				<Rect
-					x={-2 * DISPLAY_BORDER}
-					y={-2 * DISPLAY_BORDER}
-					width={width + 4 * DISPLAY_BORDER}
-					height={height + 4 * DISPLAY_BORDER}
-					fill={DISPLAY_FILL}
-					stroke={DISPLAY_STROKE}
-					strokeWidth={DISPLAY_BORDER}
+					x={-2 * BORDER}
+					y={-2 * BORDER}
+					width={width + 4 * BORDER}
+					height={height + 4 * BORDER}
+					fill={FILL}
+					stroke={STROKE_LIGHT}
+					strokeWidth={BORDER}
 				/>
 				{/* if isset rows and cols agr */}
 
@@ -31,14 +25,14 @@ export default class GridLayout extends Component {
 							<Group>
 								<Rect
 									key={[i, j]}
-									x={dx * DISPLAY_CELL}
-									y={dy * DISPLAY_CELL}
-									width={DISPLAY_CELL}
-									height={DISPLAY_CELL}
-									stroke={DISPLAY_STROKE_ALT}
-									strokeWidth={DISPLAY_BORDER}
+									x={dx * CELL}
+									y={dy * CELL}
+									width={CELL}
+									height={CELL}
+									stroke={STROKE_DARK}
+									strokeWidth={STROKE_WIDTH}
 								/>
-								<Text x={dx * DISPLAY_CELL} y={dy * DISPLAY_CELL} />
+								<Text x={dx * CELL} y={dy * CELL} />
 							</Group>
 						)
 					})

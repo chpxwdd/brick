@@ -1,18 +1,18 @@
 import React, { Component } from 'react'
 import GridLayout from '../GridLayout'
-import { DISPLAY_COLS, DISPLAY_ROWS, DISPLAY_MARGIN, DISPLAY_CELL } from '../../constants/display-constants'
+import { COLS, ROWS, MARGIN, CELL } from '../../constants/dimention-constants'
 
 export default class Board extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			x: DISPLAY_MARGIN,
-			y: DISPLAY_MARGIN,
-			width: DISPLAY_COLS * DISPLAY_CELL,
-			height: DISPLAY_ROWS * DISPLAY_CELL,
-			cols: DISPLAY_COLS,
-			rows: DISPLAY_ROWS,
+			x: 0,
+			y: 0,
+			width: COLS * CELL,
+			height: ROWS * CELL,
+			cols: COLS,
+			rows: ROWS,
 		}
 	}
 

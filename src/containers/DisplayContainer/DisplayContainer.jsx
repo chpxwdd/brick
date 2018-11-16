@@ -1,32 +1,38 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import Display from '../../components/Display'
+import { Stage, Layer, Group } from 'react-konva'
+// import {
+// 	actionDisplayUpdateBoard,
+// 	actionDisplayUpdateNextShape,
+// 	actionDisplayUpdateCurrentShape,
+// } from '../../actions/display-actions'
 import {
-	actionDisplayUpdateBoard,
-	actionDisplayUpdateNextShape,
-	actionDisplayUpdateCurrentShape,
-} from '../../actions/display-actions'
+	DISPLAY_COLS,
+	DISPLAY_ROWS,
+	DISPLAY_CELL,
+	DISPLAY_SHAPE_CELLS,
+	DISPLAY_MARGIN,
+} from '../../constants/display-constants'
+import { COLS, ROWS, CELL, MARGIN, SHAPE_CELLS } from '../../constants/dimention-constants'
+
+import BoardContainer from '../../containers/BoardContainer'
+import NextShapeContainer from '../../containers/NextShapeContainer'
+import GridLayout from '../../components/GridLayout'
 
 class DisplayContainer extends Component {
-	render() {
-		const {
-			display,
-			actionDisplayUpdateBoard,
-			actionDisplayUpdateNextShape,
-			actionDisplayUpdateCurrentShape,
-		} = this.props
+	dimentions = {
+		width: COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN,
+		height: ROWS * CELL + 2 * MARGIN,
+	}
 
+	render() {
+		const { width, height } = this.dimentions
 		return (
 			<div>
 				<Stage width={width} height={height}>
 					<Layer>
-						<Display
-							display={display}
-							// actionDisplayUpdateBoard={actionDisplayUpdateBoard}
-							// actionDisplayUpdateNextShape={actionDisplayUpdateNextShape}
-							// actionDisplayUpdateCurrentShape={actionDisplayUpdateCurrentShape}
-						/>
+						<GridLayout x={0} y={0} width={width} height={height} />
 						<BoardContainer />
 						<NextShapeContainer />
 					</Layer>
@@ -38,15 +44,13 @@ class DisplayContainer extends Component {
 
 const mapStateToProps = store => {
 	return {
-		display: store.display,
+		// process: store.process,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		actionDisplayUpdateBoard: bindActionCreators(actionDisplayUpdateBoard, dispatch),
-		actionDisplayUpdateCurrentShape: bindActionCreators(actionDisplayUpdateCurrentShape, dispatch),
-		actionDisplayUpdateNextShape: bindActionCreators(actionDisplayUpdateNextShape, dispatch),
+		// actionDisplayUpdateBoard: bindActionCreators(actionDisplayUpdateBoard, dispatch),
 	}
 }
 

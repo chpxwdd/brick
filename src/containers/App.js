@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Grid, Row } from 'react-bootstrap'
-// import GameContainer from '../containers/GameContainer'
-import DisplayContainer from '../containers/DisplayContainer'
+import { Stage, Layer } from 'react-konva'
+// import DisplayContainer from '../containers/DisplayContainer'
 import ProcessContainer from '../containers/ProcessContainer'
+import BoardContainer from '../containers/BoardContainer'
+import NextShapeContainer from '../containers/NextShapeContainer'
 import '../index.css'
+import DisplayContainer from './DisplayContainer/DisplayContainer'
 class App extends Component {
 	render() {
 		return (
@@ -11,7 +14,7 @@ class App extends Component {
 				<Grid>
 					<Row>
 						<DisplayContainer />
-						{/* <Control/> */}
+						<hr />
 						<ProcessContainer />
 					</Row>
 				</Grid>

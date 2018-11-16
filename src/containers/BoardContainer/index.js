@@ -1,2 +1,2 @@
-import GameContainer from './GameContainer'
-export default GameContainer
+import BoardContainer from './BoardContainer'
+export default BoardContainer
