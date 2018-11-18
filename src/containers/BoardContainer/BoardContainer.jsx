@@ -27,14 +27,19 @@ class BoardContainer extends Component {
 	}
 
 	render() {
-		const { board, currentShape, process } = this.props
+		const { board, currentShape, currentShapeUpdate, process } = this.props
+		console.log('<BoardContainer/>', currentShape)
 
 		return (
 			<Layer>
 				<GridLayout {...this.state} />
 				<Group x={MARGIN} y={MARGIN}>
-					<Board board={board} currentShape={currentShape} />
-					<CurrentShape currentShape={currentShape} />
+					<CurrentShape
+						currentShape={currentShape}
+						currentShapeUpdate={currentShapeUpdate}
+						process={process}
+					/>
+					<Board board={board} />
 				</Group>
 				<Group x={2 * MARGIN + COLS * CELL} y={MARGIN}>
 					<Process process={process} />

@@ -1,14 +1,4 @@
-import { range, matrix, matrixPairs } from './utils'
-
-import {
-	ROTATE_0,
-	ROTATE_90,
-	ROTATE_180,
-	ROTATE_270,
-	// MOVE_DOWN,
-	// MOVE_RIGHT,
-	// MOVE_LEFT,
-} from '../constants/control-constants'
+import { matrix, matrixPairs } from './utils'
 
 import { SHAPE_CELLS } from '../constants/dimention-constants'
 
@@ -16,7 +6,7 @@ export const getShape = (alias = null) => {
 	if (!alias) {
 		alias = randomShape(shapeList)
 	}
-	console.log(alias, shapeMatrixConfig(alias))
+	// console.log(alias, shapeMatrixConfig(alias))
 	const shapeConfig = shapeMatrixConfig(alias)
 	const shapeMatrix = []
 
@@ -34,7 +24,7 @@ export const getShape = (alias = null) => {
 	// console.log('base', shapeMatrix)
 	// console.log('transponse ', transponse(shapeMatrix))
 
-	return { matrix: shapeMatrix }
+	return { angle: 0, alias: alias, matrix: shapeMatrix }
 }
 
 const shapeList = ['I', 'O', 'T', 'S', 'Z', 'L', 'J']

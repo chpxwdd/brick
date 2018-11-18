@@ -6,29 +6,33 @@ import * as shapeUtils from '../../utils/shape-utils'
 class Control extends Component {
 	constructor(props) {
 		super(props)
-
+		this.state = { secondsElapsed: 0 }
 		this.run = this.run.bind(this)
-		// this.pause = this.pause.bind(this)
+		this.pause = this.pause.bind(this)
 		// this.continue = this.continue.bind(this)
 		// this.stop = this.stop.bind(this)
+	}
+
+	pause = () => {
+		this.props.updateStatus(PAUSE)
+	}
+
+	stop = () => {
+		this.props.updateProcess({ status: RUN, speed: 0 })
 	}
 
 	run = () => {
 		this.props.updateProcess({
 			status: RUN,
-			score: 1,
 			speed: 1,
-			lines: 1,
 		})
 
 		const nextShape = shapeUtils.getShape()
 		this.props.nextShapeUpdate(nextShape)
-		this.props.currentShapeUpdate({
-			dx: 0,
-			dy: 10,
-			matrix: shapeUtils.transponse(nextShape.matrix),
-		})
+		this.props.currentShapeUpdate(nextShape)
 	}
+
+	componentDidUpdate() {}
 
 	render() {
 		const { process } = this.props
@@ -37,7 +41,6 @@ class Control extends Component {
 				<ButtonGroup bsSize="sm">
 					<Button
 						onClick={this.run}
-						// onClick={() => {							 this.props.updateStatus(RUN)						}}
 						disabled={process.status === PAUSE}
 						bsStyle={process.status === RUN ? 'success' : 'default'}
 					>

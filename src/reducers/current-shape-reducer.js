@@ -1,6 +1,6 @@
 import { CURRENT_SHAPE_UPDATE } from '../constants/current-shape-constants'
 
-const initialState = { dx: 0, dy: 0, matrix: [] }
+const initialState = { dx: 0, dy: 0, alias: '', matrix: [] }
 
 export default function currentShapeReducer(
 	state = initialState,
@@ -10,9 +10,7 @@ export default function currentShapeReducer(
 		case CURRENT_SHAPE_UPDATE:
 			return {
 				...state,
-				dx: 0,
-				dy: 0,
-				matrix: payload.matrix,
+				...payload,
 			}
 		default:
 			return state

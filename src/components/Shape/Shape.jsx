@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { Group } from 'react-konva'
 import Cell from '../Cell'
-import { DARK } from '../../constants/dimention-constants'
+import { DARK, CELL, LIGHT } from '../../constants/dimention-constants'
 
 export default class Shape extends Component {
-	componentDidMount() {}
+	componentDidMount() {
+		// console.log('<Shape /> componentDidMount', this.props)
+	}
 
 	render() {
 		const { dx, dy, matrix } = this.props
-		console.log('<Shape/>', dx, dy, matrix)
+		// console.log('<Shape/>', dx, dy, matrix)
 		return (
-			<Group x={dx} y={dy}>
+			<Group x={dx * CELL} y={dy * CELL}>
 				{matrix.map((line, coordY) => {
 					return line.map((status, coordX) => {
 						return (
@@ -19,7 +21,6 @@ export default class Shape extends Component {
 								dx={coordX}
 								dy={coordY}
 								status={status}
-								fill={DARK}
 							/>
 						)
 					})
