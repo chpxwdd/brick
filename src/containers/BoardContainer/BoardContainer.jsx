@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-// import { bindActionCreators } from 'redux'
+import { bindActionCreators } from 'redux'
 import { Group, Layer } from 'react-konva'
+import { actionBoardUpdate } from '../../actions/board-actions'
+import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
+import { actionNextShapeUpdate } from '../../actions/next-shape-actions'
 import { COLS, ROWS, CELL } from '../../constants/dimention-constants'
 import { MARGIN } from '../../constants/dimention-constants'
-// import { actionBoardUpdate } from '../../actions/board-actions'
-// import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
 import Board from '../../components/Board'
 import GridLayout from '../../components/GridLayout'
+import Process from '../../components/Process'
 import CurrentShape from '../../components/CurrentShape'
 
 class BoardContainer extends Component {
@@ -15,8 +17,8 @@ class BoardContainer extends Component {
 		super(props)
 
 		this.state = {
-			x: 0,
-			y: 0,
+			x: MARGIN,
+			y: MARGIN,
 			width: COLS * CELL,
 			height: ROWS * CELL,
 			cols: COLS,
@@ -25,18 +27,17 @@ class BoardContainer extends Component {
 	}
 
 	render() {
-		const { board, currentShape } = this.props
+		const { board, currentShape, process } = this.props
 
 		return (
 			<Layer>
+				<GridLayout {...this.state} />
 				<Group x={MARGIN} y={MARGIN}>
-					<GridLayout {...this.state} />
-					<Board board={board} />
-					<CurrentShape
-						dx={currentShape.dx}
-						dy={currentShape.dy}
-						matrix={currentShape.matrix}
-					/>
+					<Board board={board} currentShape={currentShape} />
+					<CurrentShape currentShape={currentShape} />
+				</Group>
+				<Group x={2 * MARGIN + COLS * CELL} y={MARGIN}>
+					<Process process={process} />
 				</Group>
 			</Layer>
 		)
@@ -47,13 +48,18 @@ const mapStateToProps = store => {
 	return {
 		board: store.board,
 		currentShape: store.currentShape,
+		process: store.process,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// boardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
-		// shapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
+		nextShapeUpdate: bindActionCreators(actionNextShapeUpdate, dispatch),
+		boardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
+		currentShapeUpdate: bindActionCreators(
+			actionCurrentShapeUpdate,
+			dispatch
+		),
 	}
 }
 

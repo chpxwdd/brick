@@ -31,14 +31,10 @@ export const getShape = (alias = null) => {
 			})
 		})
 	})
-	console.log('base', shapeMatrix)
-	console.log('transponse ', transponse(shapeMatrix))
+	// console.log('base', shapeMatrix)
+	// console.log('transponse ', transponse(shapeMatrix))
 
-	return {
-		dx: 0,
-		dy: 0,
-		matrix: shapeMatrix,
-	}
+	return { matrix: shapeMatrix }
 }
 
 const shapeList = ['I', 'O', 'T', 'S', 'Z', 'L', 'J']

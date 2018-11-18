@@ -8,7 +8,7 @@ export default class Shape extends Component {
 
 	render() {
 		const { dx, dy, matrix } = this.props
-
+		console.log('<Shape/>', dx, dy, matrix)
 		return (
 			<Group x={dx} y={dy}>
 				{matrix.map((line, coordY) => {

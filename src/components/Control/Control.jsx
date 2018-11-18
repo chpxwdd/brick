@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/control-constants'
+import * as shapeUtils from '../../utils/shape-utils'
 
 class Control extends Component {
 	constructor(props) {
@@ -12,11 +13,21 @@ class Control extends Component {
 		// this.stop = this.stop.bind(this)
 	}
 
-	componentDidMount() {
-		console.log('<Control /> didMount')
-	}
 	run = () => {
-		this.props.updateStatus(RUN)
+		this.props.updateProcess({
+			status: RUN,
+			score: 1,
+			speed: 1,
+			lines: 1,
+		})
+
+		const nextShape = shapeUtils.getShape()
+		this.props.nextShapeUpdate(nextShape)
+		this.props.currentShapeUpdate({
+			dx: 0,
+			dy: 10,
+			matrix: shapeUtils.transponse(nextShape.matrix),
+		})
 	}
 
 	render() {

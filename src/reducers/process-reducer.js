@@ -15,16 +15,15 @@ const initialState = {
 	lines: 0,
 }
 
-export default function processReducer(state = initialState, { type, payload }) {
+export default function processReducer(
+	state = initialState,
+	{ type, payload }
+) {
 	switch (type) {
 		case PROCESS_UPDATE:
 			return {
 				...state,
-				payload,
-				// score: payload.score,
-				// speed: payload.speed,
-				// status: payload.status,
-				// lines: payload.lines,
+				...payload,
 			}
 		case PROCESS_UPDATE_LINES:
 			return {

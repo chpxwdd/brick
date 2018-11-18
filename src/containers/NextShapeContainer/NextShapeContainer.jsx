@@ -36,7 +36,6 @@ class NextShapeContainer extends Component {
 			<Layer>
 				<GridLayout {...this.state} />
 				<Group x={x} y={y}>
-					<Cell dx={1} dy={1} status={1} />
 					<NextShape
 						process={process}
 						nextShape={nextShape}

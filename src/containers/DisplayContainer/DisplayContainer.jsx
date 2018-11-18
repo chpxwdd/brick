@@ -11,25 +11,29 @@ import {
 import BoardContainer from '../../containers/BoardContainer'
 import NextShapeContainer from '../../containers/NextShapeContainer'
 import GridLayout from '../../components/GridLayout'
-import ProcessContainer from '../ProcessContainer'
 
 class DisplayContainer extends Component {
-	dimentions = {
-		width: COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN,
-		height: ROWS * CELL + 2 * MARGIN,
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			x: 0,
+			y: 0,
+			width: COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN,
+			height: ROWS * CELL + 2 * MARGIN,
+		}
 	}
 
 	render() {
-		const { width, height } = this.dimentions
+		const { x, y, width, height } = this.state
 		return (
 			<div>
 				<Stage width={width} height={height}>
 					<Layer>
-						<GridLayout x={0} y={0} width={width} height={height} />
+						<GridLayout x={x} y={y} width={width} height={height} />
 					</Layer>
 					<BoardContainer />
 					<NextShapeContainer />
-					{/* <ProcessContainer /> */}
 				</Stage>
 			</div>
 		)
