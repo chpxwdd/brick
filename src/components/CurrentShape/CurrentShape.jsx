@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Shape from '../Shape'
 import { Group } from 'react-konva'
-import { RUN, PAUSE } from '../../constants/control-constants'
-import { CELL, ROWS } from '../../constants/dimention-constants'
+import { RUN, PAUSE, STOP } from '../../constants/control-constants'
+import { ROWS } from '../../constants/dimention-constants'
 // import Process from '../Process';
 
 export default class CurrentShape extends Component {
@@ -13,7 +13,7 @@ export default class CurrentShape extends Component {
 			if (currentShape.dy <= ROWS) {
 				currentShapeUpdate(currentShape.dy++)
 			} else {
-				currentShapeUpdate({})
+				currentShapeUpdate({ dx: 0, dy: 0, matrix: [] })
 			}
 		}
 
@@ -22,7 +22,7 @@ export default class CurrentShape extends Component {
 			currentShapeUpdate({})
 		}
 
-		console.log(currentShape.dy)
+		console.log(currentShape.dy, ROWS)
 	}
 
 	componentDidUpdate() {

@@ -12,7 +12,6 @@ import {
 } from '../../constants/dimention-constants'
 import GridLayout from '../../components/GridLayout'
 import NextShape from '../../components/NextShape'
-import Cell from '../../components/Cell'
 
 class NextShapeContainer extends Component {
 	constructor(props) {
