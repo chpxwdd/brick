@@ -11,6 +11,7 @@ import Board from '../../components/Board'
 import GridLayout from '../../components/GridLayout'
 import Process from '../../components/Process'
 import CurrentShape from '../../components/CurrentShape'
+import { RUN } from '../../constants/control-constants'
 
 class BoardContainer extends Component {
 	constructor(props) {
@@ -28,17 +29,18 @@ class BoardContainer extends Component {
 
 	render() {
 		const { board, currentShape, currentShapeUpdate, process } = this.props
-		console.log('<BoardContainer/>', currentShape)
 
 		return (
 			<Layer>
 				<GridLayout {...this.state} />
 				<Group x={MARGIN} y={MARGIN}>
-					<CurrentShape
-						currentShape={currentShape}
-						currentShapeUpdate={currentShapeUpdate}
-						process={process}
-					/>
+					{process.status === RUN && (
+						<CurrentShape
+							currentShape={currentShape}
+							currentShapeUpdate={currentShapeUpdate}
+							process={process}
+						/>
+					)}
 					<Board board={board} />
 				</Group>
 				<Group x={2 * MARGIN + COLS * CELL} y={MARGIN}>
