@@ -19,7 +19,6 @@ export default class CurrentShape extends Component {
 
 		if (process.status === PAUSE) {
 			clearInterval(this.interval)
-			currentShapeUpdate({})
 		}
 
 		console.log(currentShape.dy, ROWS)

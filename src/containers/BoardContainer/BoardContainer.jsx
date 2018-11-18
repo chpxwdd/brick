@@ -11,7 +11,7 @@ import Board from '../../components/Board'
 import GridLayout from '../../components/GridLayout'
 import Process from '../../components/Process'
 import CurrentShape from '../../components/CurrentShape'
-import { RUN } from '../../constants/control-constants'
+import { RUN, PAUSE, STOP } from '../../constants/control-constants'
 
 class BoardContainer extends Component {
 	constructor(props) {
@@ -34,7 +34,7 @@ class BoardContainer extends Component {
 			<Layer>
 				<GridLayout {...this.state} />
 				<Group x={MARGIN} y={MARGIN}>
-					{process.status === RUN && (
+					{(process.status === RUN || process.status === PAUSE) && (
 						<CurrentShape
 							currentShape={currentShape}
 							currentShapeUpdate={currentShapeUpdate}
