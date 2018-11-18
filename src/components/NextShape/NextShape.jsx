@@ -5,10 +5,12 @@ import { Group } from 'react-konva'
 
 export default class NextShape extends Component {
 	render() {
-		const { dx, dy, matrix } = this.props.nextShape
+		const { nextShape } = this.props
+
 		return (
-			<Group x={0} y={0}>
-				<Shape dx={dx} dy={dy} matrix={matrix} />
+			<Group>
+				{/* <Shape dx={dx} dy={dy} matrix={matrix} /> */}
+				<Shape {...nextShape} />
 			</Group>
 		)
 	}

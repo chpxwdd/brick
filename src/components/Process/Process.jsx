@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon, Label } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/control-constants'
 // import { moveShape, rotateShape, shapeMatrix, shapeList, randomShape } from '../../utils/shape-utils'
-import { shapeList, randomShape } from '../../utils/shape-utils'
+import {
+	getShape,
+	transponse,
+	shapeList,
+	randomShape,
+} from '../../utils/shape-utils'
 // import { boardCheckShapePosition, boardCombineShape, boardDropLine } from '../../utils/board-utils'
 
 class Process extends Component {
@@ -15,29 +20,17 @@ class Process extends Component {
 		this.stop = this.stop.bind(this)
 	}
 
-	// componentDidMount() {
-	// 	if (this.props.process.status === RUN) {
-	// 		this.game()
-	// 	}
-	// }
-
 	run = () => {
-		// currentShape
-		// let shape = randomShape()
-		// store.dispatch(actionDisplayAddShape(shape))
-
-		// nextShape
-
-		// меняем статус
-		// меняем статус
-
-		// меняем статус
-		// this.props.boardUpdate({ board: boardMatrix(ROWS, COLS) })
-		this.props.updateSpeed(1)
-		this.props.updateStatus(RUN)
-		this.game()
-		// store.dispatch(actionProcessUpdateSpeed(1))
-		// store.dispatch(actionProcessUpdateStatus(RUN))
+		// next Shape
+		const shape = getShape()
+		this.props.nextShapeUpdate(shape)
+		// rotate to current shape cont
+		// this.props.currentShapeUpdate(shape)
+		this.props.currentShapeUpdate({
+			dx: 0,
+			dt: 0,
+			matrix: shape.matrix,
+		})
 	}
 
 	pause = () => {
@@ -57,18 +50,6 @@ class Process extends Component {
 
 	rotate = (direction, angle) => {}
 
-	game() {
-		// const { process, board, currentShape, nextShape } = this.props
-		// const { process, currentShape, nextShape } = this.props
-
-		const _nsAlias = randomShape(shapeList)
-		console.log(_nsAlias)
-		let interval = 100
-		if (this.props.process.status == RUN) {
-			setInterval({}, interval)
-		}
-	}
-
 	render() {
 		const { process } = this.props
 
@@ -79,18 +60,30 @@ class Process extends Component {
 						<Button
 							onClick={this.run}
 							disabled={process.status === PAUSE}
-							bsStyle={process.status === RUN ? 'success' : 'default'}
+							bsStyle={
+								process.status === RUN ? 'success' : 'default'
+							}
 						>
 							<Glyphicon glyph="play" />
 						</Button>
 						<Button
-							onClick={process.status === PAUSE ? this.continue : this.pause}
+							onClick={
+								process.status === PAUSE
+									? this.continue
+									: this.pause
+							}
 							disabled={process.status === STOP}
-							bsStyle={process.status === PAUSE ? 'primary' : 'default'}
+							bsStyle={
+								process.status === PAUSE ? 'primary' : 'default'
+							}
 						>
 							<Glyphicon glyph="pause" />
 						</Button>
-						<Button onClick={this.stop} disabled={process.status === STOP} bsStyle="default">
+						<Button
+							onClick={this.stop}
+							disabled={process.status === STOP}
+							bsStyle="default"
+						>
 							<Glyphicon glyph="stop" />
 						</Button>
 					</ButtonGroup>

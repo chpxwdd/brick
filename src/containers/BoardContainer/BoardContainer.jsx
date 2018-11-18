@@ -3,19 +3,42 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Group } from 'react-konva'
 import Board from '../../components/Board'
-import CurrentShape from '../../components/CurrentShape'
+import { COLS, ROWS, CELL, COLOR } from '../../constants/dimention-constants'
+import GridLayout from '../../components/GridLayout'
 import { MARGIN } from '../../constants/dimention-constants'
 import { actionBoardUpdate } from '../../actions/board-actions'
 import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
 
 class BoardContainer extends Component {
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			x: 0,
+			y: 0,
+			width: COLS * CELL,
+			height: ROWS * CELL,
+			cols: COLS,
+			rows: ROWS,
+		}
+	}
 	render() {
-		const { board, currentShape, currentShapeUpdate, boardUpdate } = this.props
+		const {
+			board,
+			currentShape,
+			currentShapeUpdate,
+			boardUpdate,
+		} = this.props
 
 		return (
 			<Group x={MARGIN} y={MARGIN}>
-				<Board board={board} />
-				<CurrentShape currentShape={currentShape} currentShapeUpdate={currentShapeUpdate} boardUpdate={boardUpdate} />
+				<GridLayout {...this.state} />
+				<Board
+					board={board}
+					currentShape={currentShape}
+					currentShapeUpdate={currentShapeUpdate}
+					boardUpdate={boardUpdate}
+				/>
 			</Group>
 		)
 	}
