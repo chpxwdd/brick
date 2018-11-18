@@ -3,6 +3,8 @@ import { Grid, Row } from 'react-bootstrap'
 import ProcessContainer from '../containers/ProcessContainer'
 import DisplayContainer from './DisplayContainer/DisplayContainer'
 import '../index.css'
+import Control from '../components/Control'
+import ControlContainer from './ControlContainer/ControlContainer'
 class App extends Component {
 	render() {
 		return (
@@ -11,7 +13,7 @@ class App extends Component {
 					<Row>
 						<DisplayContainer />
 						<hr />
-						<ProcessContainer />
+						<ControlContainer />
 					</Row>
 				</Grid>
 			</div>

@@ -22,7 +22,7 @@ export default class Board extends Component {
 		const { x, y } = this.state
 		return (
 			<Group x={x} y={y}>
-				<CurrentShape {...currentShape} />
+				{/* <CurrentShape {...currentShape} /> */}
 
 				{board.map((line, coordY) => {
 					return line.map((status, coordX) => {

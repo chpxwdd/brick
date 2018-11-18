@@ -1,61 +1,34 @@
 import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
-import { RUN, STOP, PAUSE } from '../../constants/control-constants'
 // import { moveShape, rotateShape, shapeMatrix, shapeList } from '../../utils/shape-utils'
-import { boardMatrix, boardCheckShapePosition, boardCombineShape, boardDropLine } from '../../utils/board-utils'
+import * as matrixUtils from '../../utils/shape-utils'
+
+import { RUN, STOP, PAUSE } from '../../constants/control-constants'
+import { SHAPE_CELLS } from '../../constants/dimention-constants'
 
 class Control extends Component {
 	constructor(props) {
 		super(props)
 
-		this.run = this.run.bind(this)
-		this.pause = this.pause.bind(this)
-		this.continue = this.continue.bind(this)
-		this.stop = this.stop.bind(this)
+		// this.run = this.run.bind(this)
+		// this.pause = this.pause.bind(this)
+		// this.continue = this.continue.bind(this)
+		// this.stop = this.stop.bind(this)
 	}
 
-	componentDidMount() {}
+	componentDidUpdate() {
+		if (this.props.process.status === RUN) {
+			// next Shape
+			const shape = matrixUtils.getShape()
 
-	run = () => {
-		const _tp = this.props
-		// currentShape
+			this.props.nextShapeUpdate(shape)
 
-		// let shape = randomShape()
-		_tp.actionBoardUpdate()
-		// store.dispatch(actionDisplayAddShape(shape))
-
-		// nextShape
-
-		// меняем статус
-		// меняем статус
-
-		// меняем статус
-
-		_tp.boardUpdate()
-		_tp.updateSpeed(1)
-		_tp.updateStatus(RUN)
-		// store.dispatch(updateSpeed(1))
-		// store.dispatch(updateStatus(RUN))
-	}
-
-	pause = () => {
-		this.props.updateStatus(PAUSE)
-	}
-
-	continue = () => {
-		this.props.updateStatus(RUN)
-	}
-
-	stop = () => {
-		this.props.updateStatus(STOP)
-	}
-
-	move = direction => {
-		// updateBoard(board)
-	}
-
-	rotate = (direction, angle) => {
-		// updateBoard(board)
+			this.props.currentShapeUpdate({
+				dx: 2,
+				dy: -1 * SHAPE_CELLS,
+				matrix: shape.matrix,
+			})
+		}
 	}
 
 	render() {
@@ -71,13 +44,23 @@ class Control extends Component {
 						<Glyphicon glyph="play" />
 					</Button>
 					<Button
-						onClick={process.status === PAUSE ? this.continue : this.pause}
+						onClick={
+							process.status === PAUSE
+								? this.continue
+								: this.pause
+						}
 						disabled={process.status === STOP}
-						bsStyle={process.status === PAUSE ? 'primary' : 'default'}
+						bsStyle={
+							process.status === PAUSE ? 'primary' : 'default'
+						}
 					>
 						<Glyphicon glyph="pause" />
 					</Button>
-					<Button onClick={this.stop} disabled={process.status === STOP} bsStyle="default">
+					<Button
+						onClick={this.stop}
+						disabled={process.status === STOP}
+						bsStyle="default"
+					>
 						<Glyphicon glyph="stop" />
 					</Button>
 				</ButtonGroup>

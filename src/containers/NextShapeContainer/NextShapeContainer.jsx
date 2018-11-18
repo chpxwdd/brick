@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { Group } from 'react-konva'
+import { Group, Layer } from 'react-konva'
 import { actionNextShapeUpdate } from '../../actions/next-shape-actions'
 import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
 import {
@@ -32,18 +32,20 @@ class NextShapeContainer extends Component {
 		} = this.props
 
 		return (
-			<Group
-				x={COLS * CELL + 2 * MARGIN}
-				y={MARGIN + (ROWS * CELL) / 2 - (SHAPE_CELLS * CELL) / 2}
-			>
-				<GridLayout {...this.dimentions} />
-				<NextShape
-					nextShape={nextShape}
-					currentShape={currentShape}
-					nextShapeUpdate={nextShapeUpdate}
-					currentShapeUpdate={currentShapeUpdate}
-				/>
-			</Group>
+			<Layer>
+				<Group
+					x={COLS * CELL + 2 * MARGIN}
+					y={MARGIN + (ROWS * CELL) / 2 - (SHAPE_CELLS * CELL) / 2}
+				>
+					<GridLayout {...this.dimentions} />
+					<NextShape
+						nextShape={nextShape}
+						currentShape={currentShape}
+						nextShapeUpdate={nextShapeUpdate}
+						currentShapeUpdate={currentShapeUpdate}
+					/>
+				</Group>
+			</Layer>
 		)
 	}
 }

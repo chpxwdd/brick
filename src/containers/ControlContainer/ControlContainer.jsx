@@ -7,42 +7,16 @@ import {
 	actionProcessUpdateScore,
 	actionProcessUpdateLines,
 } from '../../actions/process-actions'
-import { Group, Layer } from 'react-konva'
-import { MARGIN, CELL, ROWS } from '../../constants/dimention-constants'
-import Process from '../../components/Process'
-import GridLayout from '../../components/GridLayout'
-class ProcessContainer extends Component {
-	dimentions = {
-		x: 2 * MARGIN + CELL * ROWS,
-		y: MARGIN,
-		width: 160,
-		height: 160,
-		// rows: SHAPE_CELLS,
-		// cols: SHAPE_CELLS,
-	}
+import Control from '../../components/Control'
+import { Layer } from 'react-konva'
 
+class ControlContainer extends Component {
 	render() {
-		const {
-			process,
-			updateStatus,
-			updateLines,
-			updateSpeed,
-			updateScore,
-		} = this.props
+		const { process } = this.props
 
-		const { x, y } = this.dimentions
 		return (
 			<Layer>
-				<GridLayout {...this.dimentions} />
-				<Group x={x} y={y}>
-					<Process
-						process={process}
-						updateLines={updateLines}
-						updateSpeed={updateSpeed}
-						updateScore={updateScore}
-						updateStatus={updateStatus}
-					/>
-				</Group>
+				<Control process={process} />
 			</Layer>
 		)
 	}
@@ -66,4 +40,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ProcessContainer)
+)(ControlContainer)
