@@ -29,7 +29,7 @@ class DisplayContainer extends Component {
 					</Layer>
 					<BoardContainer />
 					<NextShapeContainer />
-					<ProcessContainer />
+					{/* <ProcessContainer /> */}
 				</Stage>
 			</div>
 		)

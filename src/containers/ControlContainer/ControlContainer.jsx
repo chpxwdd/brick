@@ -6,18 +6,25 @@ import {
 	actionProcessUpdateStatus,
 	actionProcessUpdateScore,
 	actionProcessUpdateLines,
+	actionProcessUpdate,
 } from '../../actions/process-actions'
 import Control from '../../components/Control'
-import { Layer } from 'react-konva'
 
 class ControlContainer extends Component {
 	render() {
-		const { process } = this.props
+		const {
+			process,
+			updateProcess,
+			updateLines,
+			updateSpeed,
+			updateStatus,
+			updateScore,
+		} = this.props
 
 		return (
-			<Layer>
-				<Control process={process} />
-			</Layer>
+			<div>
+				<Control process={process} updateStatus={updateStatus} />
+			</div>
 		)
 	}
 }
@@ -34,6 +41,7 @@ const mapDispatchToProps = dispatch => {
 		updateSpeed: bindActionCreators(actionProcessUpdateSpeed, dispatch),
 		updateStatus: bindActionCreators(actionProcessUpdateStatus, dispatch),
 		updateScore: bindActionCreators(actionProcessUpdateScore, dispatch),
+		updateProcess: bindActionCreators(actionProcessUpdate, dispatch),
 	}
 }
 

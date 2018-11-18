@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Group, Layer } from 'react-konva'
 import { actionNextShapeUpdate } from '../../actions/next-shape-actions'
-import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
 import {
 	COLS,
 	ROWS,
@@ -13,36 +12,35 @@ import {
 } from '../../constants/dimention-constants'
 import GridLayout from '../../components/GridLayout'
 import NextShape from '../../components/NextShape'
+import Cell from '../../components/Cell'
 
 class NextShapeContainer extends Component {
-	dimentions = {
-		x: 0,
-		y: 0,
-		width: CELL * SHAPE_CELLS,
-		height: CELL * SHAPE_CELLS,
-		rows: SHAPE_CELLS,
-		cols: SHAPE_CELLS,
+	constructor(props) {
+		super(props)
+
+		this.state = {
+			x: COLS * CELL + 2 * MARGIN,
+			y: MARGIN + (ROWS * CELL) / 2 - (SHAPE_CELLS * CELL) / 2,
+			width: CELL * SHAPE_CELLS,
+			height: CELL * SHAPE_CELLS,
+			rows: SHAPE_CELLS,
+			cols: SHAPE_CELLS,
+		}
 	}
+
 	render() {
-		const {
-			nextShape,
-			currentShape,
-			nextShapeUpdate,
-			currentShapeUpdate,
-		} = this.props
+		const { x, y } = this.state
+		const { process, nextShape, nextShapeUpdate } = this.props
 
 		return (
 			<Layer>
-				<Group
-					x={COLS * CELL + 2 * MARGIN}
-					y={MARGIN + (ROWS * CELL) / 2 - (SHAPE_CELLS * CELL) / 2}
-				>
-					<GridLayout {...this.dimentions} />
+				<GridLayout {...this.state} />
+				<Group x={x} y={y}>
+					<Cell dx={1} dy={1} status={1} />
 					<NextShape
+						process={process}
 						nextShape={nextShape}
-						currentShape={currentShape}
 						nextShapeUpdate={nextShapeUpdate}
-						currentShapeUpdate={currentShapeUpdate}
 					/>
 				</Group>
 			</Layer>
@@ -52,18 +50,14 @@ class NextShapeContainer extends Component {
 
 const mapStateToProps = store => {
 	return {
+		process: store.process,
 		nextShape: store.nextShape,
-		currentShape: store.currentShape,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
 		nextShapeUpdate: bindActionCreators(actionNextShapeUpdate, dispatch),
-		currentShapeUpdate: bindActionCreators(
-			actionCurrentShapeUpdate,
-			dispatch
-		),
 	}
 }
 

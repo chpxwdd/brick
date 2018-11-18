@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { Grid, Row } from 'react-bootstrap'
-import ProcessContainer from '../containers/ProcessContainer'
 import DisplayContainer from './DisplayContainer/DisplayContainer'
-import '../index.css'
-import Control from '../components/Control'
 import ControlContainer from './ControlContainer/ControlContainer'
+import '../index.css'
 class App extends Component {
 	render() {
 		return (
