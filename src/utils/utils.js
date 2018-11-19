@@ -50,16 +50,15 @@ export const dimentions = block => {
 			return {
 				x: MARGIN,
 				y: MARGIN,
-				width: COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN,
-				height: ROWS * CELL + 2 * MARGIN,
+				width: COLS * CELL,
+				height: ROWS * CELL,
 				cols: COLS,
 				rows: ROWS,
 			}
 		case BLOCK_NEXT_SHAPE:
 			return {
 				x: 2 * MARGIN + COLS * CELL,
-				y: 100,
-				// y: ROWS * CELL + (2 * MARGIN) / 2 - (CELL * SHAPE_CELLS) / 2,
+				y: (ROWS * CELL) / 2 - (SHAPE_CELLS * CELL) / 2 + MARGIN,
 				width: SHAPE_CELLS * CELL,
 				height: SHAPE_CELLS * CELL,
 				cols: SHAPE_CELLS,

@@ -52,7 +52,7 @@ class GameContainer extends Component {
 						<Col xs={12} style={{ margin: MARGIN }}>
 							<Stage {...dimentions(BLOCK_DISPLAY)}>
 								<Layer>
-									<GridLayout {...dimentions(BLOCK_DISPLAY)} />
+									{/* <GridLayout {...dimentions(BLOCK_DISPLAY)} /> */}
 									<GridLayout {...dimentions(BLOCK_NEXT_SHAPE)} />
 									<GridLayout {...dimentions(BLOCK_BOARD)} />
 								</Layer>
