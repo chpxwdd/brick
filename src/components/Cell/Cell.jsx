@@ -6,6 +6,7 @@ import {
 	STROKE_WIDTH,
 	COLOR,
 	DARK,
+	LIGHT,
 } from '../../constants/dimention-constants'
 
 class Cell extends Component {
@@ -27,15 +28,16 @@ class Cell extends Component {
 					y={2 * BORDER}
 					width={CELL - 4 * BORDER}
 					height={CELL - 4 * BORDER}
-					fill={status ? DARK : null}
+					fill={status ? DARK : LIGHT}
 					strokeWidth={status ? STROKE_WIDTH / 2 : 0}
 					stroke={status ? COLOR : null}
 				/>
 				<Text
-					x={CELL / 3.3}
-					y={CELL / 3.3}
-					text={String(status)}
-					fontSize={8}
+					x={4 * BORDER}
+					y={4 * BORDER}
+					text={String(dx + ':' + dy)}
+					// text={String(status)}
+					fontSize={CELL / 3.3}
 				/>
 			</Group>
 		)

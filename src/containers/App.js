@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { Grid, Row, Col } from 'react-bootstrap'
 import DisplayContainer from './DisplayContainer/DisplayContainer'
 import ControlContainer from './ControlContainer/ControlContainer'
-import '../index.css'
 import { MARGIN } from '../constants/dimention-constants'
+import '../index.css'
 class App extends Component {
 	render() {
 		return (

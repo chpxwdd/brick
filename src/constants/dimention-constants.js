@@ -1,6 +1,6 @@
 export const COLS = 10
 export const ROWS = 20
-export const CELL = 20
+export const CELL = 40
 export const BORDER = 2
 
 export const COLOR = '#a4b5af'
