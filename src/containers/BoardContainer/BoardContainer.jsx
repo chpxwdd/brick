@@ -14,12 +14,6 @@ class BoardContainer extends Component {
 
 		return (
 			<Group x={MARGIN} y={MARGIN}>
-				<GridLayout
-					width={COLS * CELL}
-					height={ROWS * CELL}
-					cols={COLS}
-					rows={ROWS}
-				/>
 				<Board board={board} boardUpdate={boardUpdate} />
 			</Group>
 		)
