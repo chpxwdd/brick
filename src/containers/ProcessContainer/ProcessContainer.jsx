@@ -25,7 +25,7 @@ const mapStateToProps = store => {
 	}
 }
 
-const mapDispatchToProps = dispatch => {}
+// const mapDispatchToProps = dispatch => {}
 
 export default connect(
 	mapStateToProps

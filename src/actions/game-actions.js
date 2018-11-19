@@ -1,9 +1,8 @@
 import { GAME_UPDATE } from '../constants/game-constants'
 
-export const actionGameUpdate = status => {
-	console.log(status)
+export const actionGameUpdate = payload => {
 	return {
 		type: GAME_UPDATE,
-		payload: status.toString(),
+		payload: payload,
 	}
 }
