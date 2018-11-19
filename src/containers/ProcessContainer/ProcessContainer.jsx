@@ -10,14 +10,17 @@ import {
 	actionProcessUpdate,
 } from '../../actions/process-actions'
 import Process from '../../components/Process'
-import { MARGIN, COLS, CELL } from '../../constants/dimention-constants'
+import {
+	dimentions,
+	BLOCK_STATISTICS,
+} from '../../constants/dimention-constants'
 
 class ProcessContainer extends Component {
 	render() {
 		const { process } = this.props
 
 		return (
-			<Group x={2 * MARGIN + COLS * CELL} y={MARGIN}>
+			<Group {...dimentions(BLOCK_STATISTICS)}>
 				<Process process={process} />
 			</Group>
 		)

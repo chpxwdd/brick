@@ -1,29 +1,20 @@
 import React, { Component } from 'react'
 import { Stage, Layer } from 'react-konva'
 
-import Display from '../../components/Display'
+import GridLayout from '../../components/GridLayout'
 import BoardContainer from '../../containers/BoardContainer'
 import NextShapeContainer from '../../containers/NextShapeContainer'
 import CurrentShapeContainer from '../../containers/CurrentShapeContainer'
 import ProcessContainer from '../../containers/ProcessContainer/'
-import {
-	COLS,
-	CELL,
-	MARGIN,
-	SHAPE_CELLS,
-	ROWS,
-} from '../../constants/dimention-constants'
+import { dimentions, BLOCK_DISPLAY } from '../../constants/dimention-constants'
 
 class DisplayContainer extends Component {
 	render() {
 		return (
 			<div>
-				<Stage
-					width={COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN}
-					height={ROWS * CELL + 2 * MARGIN}
-				>
+				<Stage {...dimentions(BLOCK_DISPLAY)}>
 					<Layer>
-						<Display />
+						<GridLayout {...dimentions(BLOCK_DISPLAY)} />
 						<ProcessContainer />
 						<BoardContainer />
 						<NextShapeContainer />
