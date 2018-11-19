@@ -12,16 +12,16 @@ export default class Control extends Component {
 	}
 
 	run = () => {
-		this.props.updateGame(String(RUN))
+		this.props.gameUpdate(RUN)
 	}
 	pause = () => {
-		this.props.updateGame(String(PAUSE))
+		this.props.gameUpdate(PAUSE)
 	}
 	resume = () => {
-		this.props.updateGame(String(RUN))
+		this.props.gameUpdate(RUN)
 	}
 	stop = () => {
-		this.props.updateGame(String(STOP))
+		this.props.gameUpdate(STOP)
 	}
 
 	render() {
@@ -43,11 +43,7 @@ export default class Control extends Component {
 					>
 						<Glyphicon glyph="pause" />
 					</Button>
-					<Button
-						onClick={this.stop}
-						disabled={game === STOP}
-						bsStyle="default"
-					>
+					<Button onClick={this.stop} disabled={game === STOP} bsStyle="default">
 						<Glyphicon glyph="stop" />
 					</Button>
 				</ButtonGroup>

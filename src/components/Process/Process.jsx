@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Group, Text } from 'react-konva'
+import { dimentions } from '../../utils/utils'
+import { BLOCK_PROCESS } from '../../constants/dimention-constants'
 export default class Process extends Component {
 	render() {
 		const { game, process } = this.props
 		return (
-			<Group x={0} y={0}>
+			<Group {...dimentions(BLOCK_PROCESS)}>
 				<Group x={0} y={0}>
 					<Text x={0} y={0} text="status" />
 					<Text x={50} y={0} text={game} />

@@ -3,14 +3,14 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { store } from './store/configureStore'
 import './index.css'
-import App from './components/App'
+import GameContainer from './containers/GameContainer'
 
 import registerServiceWorker from './registerServiceWorker'
 
 render(
 	<div>
 		<Provider store={store}>
-			<App />
+			<GameContainer />
 		</Provider>
 	</div>,
 	document.getElementById('root')
