@@ -8,12 +8,11 @@ import CurrentShape from '../../components/CurrentShape'
 
 class CurrentShapeContainer extends Component {
 	render() {
-		const { process, currentShape, currentShapeUpdate } = this.props
+		const { currentShape, currentShapeUpdate } = this.props
 
 		return (
 			<Group x={MARGIN} y={MARGIN}>
 				<CurrentShape
-					process={process}
 					currentShape={currentShape}
 					currentShapeUpdate={currentShapeUpdate}
 				/>
@@ -25,9 +24,9 @@ class CurrentShapeContainer extends Component {
 const mapStateToProps = store => {
 	return {
 		process: store.process,
-		nextShape: store.nextShape,
+		// nextShape: store.nextShape,
 		currentShape: store.currentShape,
-		board: store.board,
+		// board: store.board,
 	}
 }
 

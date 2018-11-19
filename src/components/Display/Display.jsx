@@ -6,7 +6,8 @@ import BoardContainer from '../../containers/BoardContainer'
 import NextShapeContainer from '../../containers/NextShapeContainer'
 import CurrentShapeContainer from '../../containers/CurrentShapeContainer'
 import ProcessContainer from '../../containers/ProcessContainer/'
-import { dimentions, BLOCK_DISPLAY } from '../../constants/dimention-constants'
+import { dimentions } from '../../utils/utils'
+import { BLOCK_DISPLAY } from '../../constants/dimention-constants'
 
 export default class Display extends Component {
 	render() {
@@ -15,11 +16,11 @@ export default class Display extends Component {
 				<Stage {...dimentions(BLOCK_DISPLAY)}>
 					<Layer>
 						<GridLayout {...dimentions(BLOCK_DISPLAY)} />
-						<BoardContainer />
 						<NextShapeContainer />
 						<ProcessContainer />
 					</Layer>
 					<Layer>
+						<BoardContainer />
 						<CurrentShapeContainer />
 					</Layer>
 				</Stage>

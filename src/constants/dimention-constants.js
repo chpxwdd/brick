@@ -12,40 +12,4 @@ export const SHAPE_CELLS = 4
 export const BLOCK_DISPLAY = 'DISPLAY'
 export const BLOCK_NEXT_SHAPE = 'NEXT_SHAPE'
 export const BLOCK_BOARD = 'BOARD'
-export const BLOCK_STATISTICS = 'STATISTICS'
-export const dimentions = block => {
-	switch (block) {
-		case BLOCK_DISPLAY:
-			return {
-				x: 0,
-				y: 0,
-				width: COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN,
-				height: ROWS * CELL + 2 * MARGIN,
-			}
-		case BLOCK_BOARD:
-			return {
-				x: 0,
-				y: 0,
-				width: COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN,
-				height: ROWS * CELL + 2 * MARGIN,
-				cols: COLS,
-				rows: ROWS,
-			}
-		case BLOCK_NEXT_SHAPE:
-			return {
-				x: 2 * MARGIN + COLS * CELL,
-				y: 0,
-				width: SHAPE_CELLS * CELL,
-				height: SHAPE_CELLS * CELL,
-				cols: SHAPE_CELLS,
-				rows: SHAPE_CELLS,
-			}
-		case BLOCK_STATISTICS:
-			return {
-				x: 2 * MARGIN + COLS * CELL,
-				y: MARGIN,
-				width: SHAPE_CELLS * CELL,
-				height: SHAPE_CELLS * CELL,
-			}
-	}
-}
+export const BLOCK_PROCESS = 'PROCESS'

@@ -1,6 +1,5 @@
 import {
 	PROCESS_UPDATE,
-	PROCESS_UPDATE_STATUS,
 	PROCESS_UPDATE_LINES,
 	PROCESS_UPDATE_SPEED,
 	PROCESS_UPDATE_SCORE,
@@ -13,38 +12,29 @@ export const actionProcessUpdate = process => {
 	}
 }
 
-export const actionProcessUpdateStatus = newValue => {
-	return {
-		type: PROCESS_UPDATE_STATUS,
-		payload: {
-			status: newValue,
-		},
-	}
-}
-
-export const actionProcessUpdateSpeed = newValue => {
+export const actionProcessUpdateSpeed = speed => {
 	return {
 		type: PROCESS_UPDATE_SPEED,
 		payload: {
-			speed: newValue,
+			speed: speed,
 		},
 	}
 }
 
-export const actionProcessUpdateScore = newValue => {
+export const actionProcessUpdateScore = score => {
 	return {
 		type: PROCESS_UPDATE_SCORE,
 		payload: {
-			score: newValue,
+			score: score,
 		},
 	}
 }
 
-export const actionProcessUpdateLines = newValue => {
+export const actionProcessUpdateLines = lines => {
 	return {
 		type: PROCESS_UPDATE_LINES,
 		payload: {
-			lines: newValue,
+			lines: lines,
 		},
 	}
 }

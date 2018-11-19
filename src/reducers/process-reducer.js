@@ -3,14 +3,10 @@ import {
 	PROCESS_UPDATE_LINES,
 	PROCESS_UPDATE_SCORE,
 	PROCESS_UPDATE_SPEED,
-	PROCESS_UPDATE_STATUS,
 } from '../constants/process-constants'
-
-import { STOP } from '../constants/control-constants'
 
 const initialState = {
 	speed: 0,
-	status: STOP,
 	score: 0,
 	lines: 0,
 }
@@ -29,11 +25,6 @@ export default function processReducer(
 			return {
 				...state,
 				lines: payload.lines,
-			}
-		case PROCESS_UPDATE_STATUS:
-			return {
-				...state,
-				status: payload.status,
 			}
 		case PROCESS_UPDATE_SPEED:
 			return {

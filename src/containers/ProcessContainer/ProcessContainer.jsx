@@ -1,27 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+// import { bindActionCreators } from 'redux'
 import { Group } from 'react-konva'
-import {
-	actionProcessUpdateSpeed,
-	actionProcessUpdateStatus,
-	actionProcessUpdateScore,
-	actionProcessUpdateLines,
-	actionProcessUpdate,
-} from '../../actions/process-actions'
+import { dimentions } from '../../utils/utils'
+import { BLOCK_PROCESS } from '../../constants/dimention-constants'
 import Process from '../../components/Process'
-import {
-	dimentions,
-	BLOCK_STATISTICS,
-} from '../../constants/dimention-constants'
 
 class ProcessContainer extends Component {
 	render() {
-		const { process } = this.props
+		const { game, process } = this.props
 
 		return (
-			<Group {...dimentions(BLOCK_STATISTICS)}>
-				<Process process={process} />
+			<Group {...dimentions(BLOCK_PROCESS)}>
+				<Process game={game} process={process} />
 			</Group>
 		)
 	}
@@ -30,20 +21,13 @@ class ProcessContainer extends Component {
 const mapStateToProps = store => {
 	return {
 		process: store.process,
+		game: store.game,
 	}
 }
 
-const mapDispatchToProps = dispatch => {
-	return {
-		updateLines: bindActionCreators(actionProcessUpdateLines, dispatch),
-		updateSpeed: bindActionCreators(actionProcessUpdateSpeed, dispatch),
-		updateStatus: bindActionCreators(actionProcessUpdateStatus, dispatch),
-		updateScore: bindActionCreators(actionProcessUpdateScore, dispatch),
-		updateProcess: bindActionCreators(actionProcessUpdate, dispatch),
-	}
-}
+const mapDispatchToProps = dispatch => {}
 
 export default connect(
-	mapStateToProps,
-	mapDispatchToProps
+	mapStateToProps
+	// mapDispatchToProps
 )(ProcessContainer)

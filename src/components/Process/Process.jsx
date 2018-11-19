@@ -1,29 +1,27 @@
 import React, { Component } from 'react'
-import { Group, Text, Label } from 'react-konva'
-class Process extends Component {
+import { Group, Text } from 'react-konva'
+export default class Process extends Component {
 	render() {
-		const { process } = this.props
+		const { game, process } = this.props
 		return (
-			<Group>
+			<Group x={0} y={0}>
 				<Group x={0} y={0}>
-					<Label x={0} y={0} text="status" />
-					<Text x={50} y={0} text={process.status} />
+					<Text x={0} y={0} text="status" />
+					<Text x={50} y={0} text={game} />
 				</Group>
 				<Group x={0} y={15}>
-					<Label x={0} y={0} text="speed" />
-					<Text x={50} y={0} text={process.speed} />
+					<Text x={0} y={0} text="speed" />
+					<Text x={50} y={0} text={String(process.speed)} />
 				</Group>
 				<Group x={0} y={30}>
-					<Label x={0} y={0} text="lines" />
-					<Text x={50} y={0} text={process.lines} />
+					<Text x={0} y={0} text="lines" />
+					<Text x={50} y={0} text={String(process.lines)} />
 				</Group>
 				<Group x={0} y={45}>
-					<Label x={0} y={0} text="score" />
-					<Text x={50} y={0} text={process.score} />
+					<Text x={0} y={0} text="score" />
+					<Text x={50} y={0} text={String(process.score)} />
 				</Group>
 			</Group>
 		)
 	}
 }
-
-export default Process

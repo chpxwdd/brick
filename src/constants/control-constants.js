@@ -1,10 +1,7 @@
-export const MOVE_DOWN = 0
-export const MOVE_LEFT = -1
-export const MOVE_RIGHT = 1
-export const ROTATE_0 = 0
-export const ROTATE_90 = 90
-export const ROTATE_180 = 180
-export const ROTATE_270 = 270
-export const RUN = 'RUN'
-export const PAUSE = 'PAUSE'
-export const STOP = 'STOP'
+export const MOVE_DOWN = 'MOVE_DOWN'
+export const MOVE_LEFT = 'MOVE_LEFT'
+export const MOVE_RIGHT = 'MOVE_RIGHT'
+export const ROTATE_0 = 'ROTATE_0'
+export const ROTATE_90 = 'ROTATE_90'
+export const ROTATE_180 = 'ROTATE_180'
+export const ROTATE_270 = 'ROTATE_270'
