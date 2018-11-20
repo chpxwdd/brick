@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/game-constants'
 import * as ShapeUtils from '../../utils/shape-utils'
-import NextShape from '../NextShape'
+import KeyHandler, { KEYPRESS } from 'react-key-handler'
 
 export default class Control extends Component {
 	constructor(props) {
@@ -18,7 +18,8 @@ export default class Control extends Component {
 		this.resume = this.resume.bind(this)
 		this.stop = this.stop.bind(this)
 		this.stepDown = this.stepDown.bind(this)
-		this.stepDown = this.stepDown.bind(this)
+		// this.currentSpeed = this.currentSpeed.bind(this)
+		this.handleKeyboard = this.handleKeyboard.bind(this)
 	}
 
 	componentWillUnmount = () => this.clearInterval(this.state.interval)
@@ -30,7 +31,7 @@ export default class Control extends Component {
 		const _tp = this.props
 
 		this.setState({
-			interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
+			interval: setInterval(this.stepDown, this.currentSpeed),
 		})
 
 		const { matrix, alias, angle } = ShapeUtils.getShape()
@@ -55,8 +56,9 @@ export default class Control extends Component {
 	resume = () => {
 		const _tp = this.props
 		_tp.gameUpdate(RUN)
+
 		this.setState({
-			interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
+			interval: setInterval(this.stepDown, this.currentSpeed),
 		})
 	}
 
@@ -77,6 +79,10 @@ export default class Control extends Component {
 		})
 	}
 
+	handleKeyboard = event => {
+		console.log(event)
+	}
+
 	/**
 	 * ---------------------   ДВИЖОК ИГРЫ    --------------------------------
 	 */
@@ -87,12 +93,35 @@ export default class Control extends Component {
 		// this.setState({ step: this.state.step + 1 })
 	}
 
-	calculateSpeed = speed => 1100 - speed * 100
+	currentSpeed = 1100 - this.props.process.speed * 100
 
 	render() {
 		const { game } = this.props
 		return (
 			<div>
+				<KeyHandler
+					keyEventName={KEYPRESS}
+					// keyCode={37}
+					keyValue="37"
+					// keyValue="ArrowLeft"
+					onKeyHandle={this.handleKeyboard}
+				/>
+				{/* <KeyHandler
+					keyEventName={KEYPRESS}
+					keyValue="39"
+					onKeyHandle={this.handleKeyboard}
+				/>aa
+				<KeyHandler
+					keyEventName={KEYPRESS}
+					keyValue="40"
+					onKeyHandle={this.handleKeyboard}
+				/>
+				<KeyHandler
+					keyEventName={KEYPRESS}
+					keyValue="38"
+					onKeyHandle={this.handleKeyboard}
+				/> */}
+
 				<ButtonGroup bsSize="sm">
 					<Button
 						onClick={this.run}
