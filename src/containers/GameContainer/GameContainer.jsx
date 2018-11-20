@@ -35,7 +35,7 @@ import {
 	BLOCK_NEXT_SHAPE,
 	BLOCK_BOARD,
 } from '../../constants/dimention-constants'
-import * as ShapeUtils from '../../utils/shape-utils'
+// import * as ShapeUtils from '../../utils/shape-utils'
 import '../../index.css'
 
 class GameContainer extends Component {
