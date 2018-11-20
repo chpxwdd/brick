@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/game-constants'
 import * as ShapeUtils from '../../utils/shape-utils'
-import KeyHandler, { KEYPRESS } from 'react-key-handler'
+import KeyboardEventHandler from 'react-keyboard-event-handler'
 
 export default class Control extends Component {
 	constructor(props) {
@@ -18,7 +18,6 @@ export default class Control extends Component {
 		this.resume = this.resume.bind(this)
 		this.stop = this.stop.bind(this)
 		this.stepDown = this.stepDown.bind(this)
-		// this.currentSpeed = this.currentSpeed.bind(this)
 		this.handleKeyboard = this.handleKeyboard.bind(this)
 	}
 
@@ -31,7 +30,7 @@ export default class Control extends Component {
 		const _tp = this.props
 
 		this.setState({
-			interval: setInterval(this.stepDown, this.currentSpeed),
+			interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
 		})
 
 		const { matrix, alias, angle } = ShapeUtils.getShape()
@@ -56,9 +55,8 @@ export default class Control extends Component {
 	resume = () => {
 		const _tp = this.props
 		_tp.gameUpdate(RUN)
-
 		this.setState({
-			interval: setInterval(this.stepDown, this.currentSpeed),
+			interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
 		})
 	}
 
@@ -79,8 +77,27 @@ export default class Control extends Component {
 		})
 	}
 
-	handleKeyboard = event => {
-		console.log(event)
+	handleKeyboard = (e, key) => {
+		switch (key) {
+			case 'left':
+				break
+			case 'right':
+				break
+			case 'down':
+				break
+			case 'up':
+				break
+			case 'enter':
+				break
+			case 'space':
+				break
+			case 'esc':
+				break
+			case 'pause':
+				break
+			default:
+				return
+		}
 	}
 
 	/**
@@ -93,34 +110,20 @@ export default class Control extends Component {
 		// this.setState({ step: this.state.step + 1 })
 	}
 
-	currentSpeed = 1100 - this.props.process.speed * 100
+	calculateSpeed = speed => 1100 - speed * 100
 
 	render() {
 		const { game } = this.props
 		return (
 			<div>
-				<KeyHandler
-					keyEventName={KEYPRESS}
-					// keyCode={37}
-					keyValue="37"
-					// keyValue="ArrowLeft"
-					onKeyHandle={this.handleKeyboard}
-				/>
-				{/* <KeyHandler
-					keyEventName={KEYPRESS}
-					keyValue="39"
-					onKeyHandle={this.handleKeyboard}
-				/>aa
-				<KeyHandler
-					keyEventName={KEYPRESS}
-					keyValue="40"
-					onKeyHandle={this.handleKeyboard}
-				/>
-				<KeyHandler
-					keyEventName={KEYPRESS}
-					keyValue="38"
-					onKeyHandle={this.handleKeyboard}
+				{/* <KeyboardEventHandler
+					handleKeys={}
+					onKeyEvent={(e, key) => console.log(key, e)}
 				/> */}
+				<KeyboardEventHandler
+					handleKeys={['all']}
+					onKeyEvent={this.handleKeyboard}
+				/>
 
 				<ButtonGroup bsSize="sm">
 					<Button

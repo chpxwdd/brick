@@ -3,13 +3,19 @@ import {
 	CURRENT_SHAPE_RESET,
 } from '../constants/current-shape-constants'
 import { SHAPE_CELLS, COLS } from '../constants/dimention-constants'
-import { ROTATE_0 } from '../constants/control-constants'
+import {
+	MOVE_LEFT,
+	MOVE_RIGHT,
+	MOVE_DOWN,
+	ROTATE,
+} from '../constants/control-constants'
+import * as ShapeUtils from '../utils/shape-utils'
 
 const initialState = {
 	dx: (COLS - SHAPE_CELLS) / 2,
 	dy: -1 * SHAPE_CELLS,
 	alias: '',
-	angle: ROTATE_0,
+	angle: 0,
 	matrix: [],
 }
 
@@ -28,6 +34,31 @@ export default function currentShapeReducer(
 			return {
 				...state,
 				...initialState,
+			}
+
+		// TODO тут можно сделать проверки на координатфы
+		case MOVE_LEFT:
+			return {
+				...state,
+				payload: { dx: state.dx - 1 },
+			}
+
+		case MOVE_RIGHT:
+			return {
+				...state,
+				payload: { dx: state.dx + 1 },
+			}
+
+		case MOVE_DOWN:
+			return {
+				...state,
+				payload: { dx: state.dx + 1 },
+			}
+
+		case ROTATE:
+			return {
+				...state,
+				payload: { matrix: ShapeUtils.transponse(state.matrix) },
 			}
 
 		default:
