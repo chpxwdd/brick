@@ -43,13 +43,13 @@ export const dimentions = block => {
 			return {
 				x: 0,
 				y: 0,
-				width: COLS * CELL + SHAPE_CELLS * CELL + 3 * MARGIN,
-				height: ROWS * CELL + 2 * MARGIN,
+				width: COLS * CELL + SHAPE_CELLS * CELL + MARGIN,
+				height: ROWS * CELL,
 			}
 		case BLOCK_BOARD:
 			return {
-				x: MARGIN,
-				y: MARGIN,
+				x: 0,
+				y: 0,
 				width: COLS * CELL,
 				height: ROWS * CELL,
 				cols: COLS,
@@ -57,8 +57,8 @@ export const dimentions = block => {
 			}
 		case BLOCK_NEXT_SHAPE:
 			return {
-				x: 2 * MARGIN + COLS * CELL,
-				y: (ROWS * CELL) / 2 - (SHAPE_CELLS * CELL) / 2 + MARGIN,
+				x: MARGIN + COLS * CELL,
+				y: (ROWS * CELL) / 2 - (SHAPE_CELLS * CELL) / 2,
 				width: SHAPE_CELLS * CELL,
 				height: SHAPE_CELLS * CELL,
 				cols: SHAPE_CELLS,
@@ -66,7 +66,7 @@ export const dimentions = block => {
 			}
 		case BLOCK_PROCESS:
 			return {
-				x: 2 * MARGIN + COLS * CELL,
+				x: MARGIN + COLS * CELL,
 				y: MARGIN,
 				width: SHAPE_CELLS * CELL,
 				height: SHAPE_CELLS * CELL,

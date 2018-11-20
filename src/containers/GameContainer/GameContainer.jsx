@@ -18,7 +18,7 @@ import Control from '../../components/Control'
 import Process from '../../components/Process'
 import NextShape from '../../components/NextShape'
 import CurrentShape from '../../components/CurrentShape'
-import BoardContainer from '../../containers/BoardContainer'
+import Board from '../../components/Board'
 import { dimentions } from '../../utils/utils'
 import {
 	MARGIN,
@@ -59,7 +59,9 @@ class GameContainer extends Component {
 								<Layer>
 									<NextShape nextShape={nextShape} />
 									<Process game={game} process={process} />
-									<BoardContainer />
+
+									<Board board={board} boardUpdate={boardUpdate} />
+									{/* <BoardContainer /> */}
 									<CurrentShape currentShape={currentShape} />
 								</Layer>
 							</Stage>
