@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import Shape from '../Shape'
 import { Group } from 'react-konva'
+import { dimentions } from '../../utils/utils'
+import { BLOCK_NEXT_SHAPE } from '../../constants/dimention-constants'
 
 export default class NextShape extends Component {
 	render() {
-		const { dx, dy, matrix } = this.props.nextShape
 		return (
-			<Group>
-				<Shape dx={dx} dy={dy} matrix={matrix} />
+			<Group x={dimentions(BLOCK_NEXT_SHAPE).x} y={dimentions(BLOCK_NEXT_SHAPE).y}>
+				<Shape {...this.props} />
 			</Group>
 		)
 	}

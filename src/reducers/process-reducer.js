@@ -6,7 +6,7 @@ import {
 } from '../constants/process-constants'
 
 const initialState = {
-	speed: 0,
+	speed: 1,
 	score: 0,
 	lines: 0,
 }

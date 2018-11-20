@@ -2,16 +2,25 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionGameUpdate } from '../../actions/game-actions'
-import { actionNextShapeUpdate } from '../../actions/next-shape-actions'
-import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
-import { actionBoardUpdate } from '../../actions/board-actions'
+import {
+	actionNextShapeUpdate,
+	actionNextShapeReset,
+} from '../../actions/next-shape-actions'
+import {
+	actionCurrentShapeUpdate,
+	actionCurrentShapeReset,
+} from '../../actions/current-shape-actions'
+import {
+	actionBoardUpdate,
+	actionBoardReset,
+} from '../../actions/board-actions'
 import {
 	actionProcessUpdate,
 	actionProcessUpdateLines,
 	actionProcessUpdateScore,
 	actionProcessUpdateSpeed,
 } from '../../actions/process-actions'
-import { Stage, Layer } from 'react-konva'
+import { Stage, Layer, Group } from 'react-konva'
 import { Grid, Row, Col } from 'react-bootstrap'
 import GridLayout from '../../components/GridLayout'
 import Control from '../../components/Control'
@@ -26,6 +35,7 @@ import {
 	BLOCK_NEXT_SHAPE,
 	BLOCK_BOARD,
 } from '../../constants/dimention-constants'
+import * as ShapeUtils from '../../utils/shape-utils'
 import '../../index.css'
 
 class GameContainer extends Component {
@@ -35,10 +45,13 @@ class GameContainer extends Component {
 			gameUpdate,
 			board,
 			boardUpdate,
+			boardReset,
 			currentShape,
 			currentShapeUpdate,
+			currentShapeReset,
 			nextShape,
 			nextShapeUpdate,
+			nextShapeReset,
 			process,
 			processUpdate,
 			scoreUpdate,
@@ -52,21 +65,23 @@ class GameContainer extends Component {
 						<Col xs={12} style={{ margin: MARGIN }}>
 							<Stage {...dimentions(BLOCK_DISPLAY)}>
 								<Layer>
-									{/* <GridLayout {...dimentions(BLOCK_DISPLAY)} /> */}
+									<GridLayout {...dimentions(BLOCK_DISPLAY)} />
 									<GridLayout {...dimentions(BLOCK_NEXT_SHAPE)} />
 									<GridLayout {...dimentions(BLOCK_BOARD)} />
 								</Layer>
 								<Layer>
-									<NextShape nextShape={nextShape} />
+									<NextShape {...nextShape} />
 									<Process game={game} process={process} />
-
-									<Board board={board} boardUpdate={boardUpdate} />
-									{/* <BoardContainer /> */}
-									<CurrentShape currentShape={currentShape} />
+									<Group x={dimentions(BLOCK_BOARD).x} y={dimentions(BLOCK_BOARD).y}>
+										<Board board={board} />
+										<CurrentShape {...currentShape} />
+									</Group>
 								</Layer>
 							</Stage>
+
 							<hr />
-							<Control game={game} gameUpdate={gameUpdate} />
+							<Control {...this.props} />
+							<hr />
 						</Col>
 					</Row>
 				</Grid>
@@ -89,8 +104,11 @@ const mapDispatchToProps = dispatch => {
 	return {
 		gameUpdate: bindActionCreators(actionGameUpdate, dispatch),
 		boardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
+		boardReset: bindActionCreators(actionBoardReset, dispatch),
 		nextShapeUpdate: bindActionCreators(actionNextShapeUpdate, dispatch),
+		nextShapeReset: bindActionCreators(actionNextShapeReset, dispatch),
 		currentShapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
+		currentShapeReset: bindActionCreators(actionCurrentShapeReset, dispatch),
 		processUpdate: bindActionCreators(actionProcessUpdate, dispatch),
 		speedUpdate: bindActionCreators(actionProcessUpdateSpeed, dispatch),
 		scoreUpdate: bindActionCreators(actionProcessUpdateScore, dispatch),
@@ -102,3 +120,4 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(GameContainer)
+// export default GameContainer

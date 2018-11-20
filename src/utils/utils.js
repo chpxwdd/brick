@@ -43,7 +43,7 @@ export const dimentions = block => {
 			return {
 				x: 0,
 				y: 0,
-				width: COLS * CELL + SHAPE_CELLS * CELL + MARGIN,
+				width: COLS * CELL + SHAPE_CELLS * CELL + 2 * MARGIN,
 				height: ROWS * CELL,
 			}
 		case BLOCK_BOARD:

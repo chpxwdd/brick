@@ -1,4 +1,7 @@
-import { NEXT_SHAPE_UPDATE } from '../constants/next-shape-constants'
+import {
+	NEXT_SHAPE_UPDATE,
+	NEXT_SHAPE_RESET,
+} from '../constants/next-shape-constants'
 const initialState = { dx: 0, dy: 0, matrix: [], alias: '', angle: 0 }
 
 export default function nextShapeReducer(
@@ -11,6 +14,12 @@ export default function nextShapeReducer(
 				...state,
 				...payload,
 			}
+		case NEXT_SHAPE_RESET:
+			return {
+				...state,
+				...initialState,
+			}
+
 		default:
 			return state
 	}

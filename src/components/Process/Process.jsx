@@ -6,7 +6,7 @@ export default class Process extends Component {
 	render() {
 		const { game, process } = this.props
 		return (
-			<Group {...dimentions(BLOCK_PROCESS)}>
+			<Group x={dimentions(BLOCK_PROCESS).x} y={dimentions(BLOCK_PROCESS).y}>
 				<Group x={0} y={0}>
 					<Text x={0} y={0} text="status" />
 					<Text x={50} y={0} text={game} />

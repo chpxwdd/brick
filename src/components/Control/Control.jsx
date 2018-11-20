@@ -1,28 +1,94 @@
 import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/game-constants'
+import * as ShapeUtils from '../../utils/shape-utils'
 
 export default class Control extends Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			interval: null,
+			step: 0,
+		}
+
 		this.run = this.run.bind(this)
 		this.pause = this.pause.bind(this)
 		this.resume = this.resume.bind(this)
 		this.stop = this.stop.bind(this)
+		this.stepDown = this.stepDown.bind(this)
+		this.stepDown = this.stepDown.bind(this)
 	}
 
+	componentDidMount() {}
+
+	componentDidUpdate() {
+		// console.log('update')
+	}
+
+	componentWillUnmount() {
+		this.clearInterval(this.state.interval)
+	}
+
+	/**
+	 * ---------------------   ДВИЖОК ИГРЫ    --------------------------------
+	 */
+	stepDown() {
+		// мониторим смену фигуры <CurrentShape> при невозможности двигаться дальше
+
+		this.setState({ step: this.state.step + 1 })
+		this.props.currentShapeUpdate({ dy: this.props.currentShape.dy + 1 })
+	}
+
+	/**
+	 * run game
+	 */
 	run = () => {
+		this.setState({
+			interval: setInterval(
+				this.stepDown,
+				this.calculateSpeed(this.props.process.speed)
+			),
+		})
+
+		this.props.nextShapeUpdate(ShapeUtils.getShape())
+		this.props.speedUpdate(1)
 		this.props.gameUpdate(RUN)
 	}
+
+	/**
+	 * pause game
+	 */
 	pause = () => {
 		this.props.gameUpdate(PAUSE)
+		clearInterval(this.state.interval)
 	}
+
+	/**
+	 * resume game
+	 */
 	resume = () => {
 		this.props.gameUpdate(RUN)
+		this.setState({
+			interval: setInterval(this.stepDown),
+		})
 	}
+
+	/**
+	 * stop game
+	 */
 	stop = () => {
+		clearInterval(this.state.interval)
 		this.props.gameUpdate(STOP)
+		this.props.processUpdate({ score: 0, speed: 1, lines: 0 })
+		this.props.currentShapeReset()
+		this.props.nextShapeReset()
+		this.setState({
+			step: 0,
+			interval: null,
+		})
 	}
+
+	calculateSpeed = speed => 1100 - speed * 100
 
 	render() {
 		const { game } = this.props
@@ -31,7 +97,7 @@ export default class Control extends Component {
 				<ButtonGroup bsSize="sm">
 					<Button
 						onClick={this.run}
-						disabled={game === RUN}
+						disabled={game === RUN || game == PAUSE}
 						bsStyle={game === RUN ? 'success' : 'default'}
 					>
 						<Glyphicon glyph="play" />
@@ -47,6 +113,8 @@ export default class Control extends Component {
 						<Glyphicon glyph="stop" />
 					</Button>
 				</ButtonGroup>
+				<div>Loading{'...'.substr(0, (this.state.step % 3) + 1)}</div>
+				<div>{this.state.step}</div>
 			</div>
 		)
 	}

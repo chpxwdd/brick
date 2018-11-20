@@ -16,17 +16,13 @@ export default class GridLayout extends Component {
 		return (
 			<Group x={x} y={y} width={width} height={height}>
 				<Rect
-					// x={-2 * BORDER}
-					// y={-2 * BORDER}
-					// width={width + 4 * BORDER}
-					// height={height + 4 * BORDER}
 					x={0}
 					y={0}
 					width={width}
 					height={height}
 					fill={COLOR}
-					stroke={DARK}
-					strokeWidth={BORDER}
+					// stroke={DARK}
+					// strokeWidth={BORDER}
 				/>
 				{/* if isset rows and cols agr */}
 
