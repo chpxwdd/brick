@@ -78,10 +78,24 @@ export default class Control extends Component {
 	}
 
 	handleKeyboard = (e, key) => {
+		const _tp = this.props
+		_tp.currentShapeUpdate({
+			..._tp.currentShape,
+			matrix: ShapeUtils.rotateLeft(_tp.currentShape.matrix),
+		})
+		console.log(e, key)
 		switch (key) {
 			case 'left':
+				_tp.currentShapeUpdate({
+					..._tp.currentShape,
+					matrix: ShapeUtils.rotateLeft(_tp.currentShape.matrix),
+				})
 				break
 			case 'right':
+				_tp.currentShapeUpdate({
+					..._tp.currentShape,
+					matrix: ShapeUtils.rotateRight(_tp.currentShape.matrix),
+				})
 				break
 			case 'down':
 				break
@@ -107,6 +121,7 @@ export default class Control extends Component {
 		const _tp = this.props
 		// мониторим смену фигуры <CurrentShape> при невозможности двигаться дальше
 		_tp.currentShapeUpdate({ ..._tp.currentShape, dy: _tp.currentShape.dy + 1 })
+
 		// this.setState({ step: this.state.step + 1 })
 	}
 

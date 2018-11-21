@@ -58,7 +58,8 @@ export default function currentShapeReducer(
 		case ROTATE:
 			return {
 				...state,
-				payload: { matrix: ShapeUtils.transponse(state.matrix) },
+				payload: { matrix: ShapeUtils.rotateRight(state.matrix) },
+				// payload: { matrix: ShapeUtils.rotateLeft(state.matrix)
 			}
 
 		default:

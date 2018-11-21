@@ -53,17 +53,34 @@ const shapeMatrixConfig = alias => {
 			return []
 	}
 }
+export const rotateLeft = base => {
+	console.log(base)
+	let m = base.length
+	let n = base[0].length
+	let matrix = []
+	for (let i = 0; i < m; i++) {
+		for (let j = 0; j < n; j++) {
+			if (!matrix[m - 1 - j]) {
+				matrix[m - 1 - j] = []
+			}
+			matrix[m - 1 - j][i] = base[i][j]
+		}
+	}
+	return matrix
+}
 
-export const rotateMatrix = matrix => {}
-
-export const transponse = base => {
-	let _base = matrix(SHAPE_CELLS)
-	base.forEach((row, i) => {
-		row.forEach((val, j) => {
-			_base[j][i] = base[i][j]
-		})
-	})
-	return _base
+export const rotateRight = base => {
+	console.log(base)
+	let m = base.length
+	let n = base[0].length
+	let matrix = []
+	for (let i = 0; i < m; i++) {
+		matrix[i] = []
+		for (let j = 0; j < n; j++) {
+			matrix[i][m - 1 - j] = base[j][i]
+		}
+	}
+	return matrix
 }
 
 export const moveShape = (shape, moveDirection) => {
