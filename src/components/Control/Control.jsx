@@ -107,7 +107,7 @@ export default class Control extends Component {
 	stepDown() {
 		const _tp = this.props
 
-		if (_tp.currentShape.dy + CELL === _tp.board.ROWS) {
+		if (_tp.currentShape.dy + CELL === ROWS) {
 			_tp.currentShapeUpdate(_tp.nextShape)
 			_tp.nextShapeReset()
 		}
