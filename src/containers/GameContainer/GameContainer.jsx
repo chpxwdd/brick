@@ -9,6 +9,11 @@ import {
 import {
 	actionCurrentShapeUpdate,
 	actionCurrentShapeReset,
+	actionCurrentShapeMoveRight,
+	actionCurrentShapeMoveLeft,
+	actionCurrentShapeMoveDown,
+	actionCurrentShapeRotateLeft,
+	actionCurrentShapeRotateRight,
 } from '../../actions/current-shape-actions'
 import {
 	actionBoardUpdate,
@@ -46,6 +51,11 @@ class GameContainer extends Component {
 			boardUpdate,
 			boardReset,
 			currentShape,
+			moveRight,
+			moveLeft,
+			moveDown,
+			rotateLeft,
+			rotateRigh,
 			currentShapeUpdate,
 			currentShapeReset,
 			nextShape,
@@ -106,6 +116,11 @@ const mapDispatchToProps = dispatch => {
 		boardReset: bindActionCreators(actionBoardReset, dispatch),
 		nextShapeUpdate: bindActionCreators(actionNextShapeUpdate, dispatch),
 		nextShapeReset: bindActionCreators(actionNextShapeReset, dispatch),
+		moveRight: bindActionCreators(actionCurrentShapeMoveRight, dispatch),
+		moveLeft: bindActionCreators(actionCurrentShapeMoveLeft, dispatch),
+		moveDown: bindActionCreators(actionCurrentShapeMoveDown, dispatch),
+		rotateRight: bindActionCreators(actionCurrentShapeRotateRight, dispatch),
+		rotateLeft: bindActionCreators(actionCurrentShapeRotateLeft, dispatch),
 		currentShapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
 		currentShapeReset: bindActionCreators(actionCurrentShapeReset, dispatch),
 		processUpdate: bindActionCreators(actionProcessUpdate, dispatch),
@@ -119,4 +134,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(GameContainer)
-// export default GameContainer

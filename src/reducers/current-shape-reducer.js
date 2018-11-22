@@ -1,14 +1,13 @@
 import {
 	CURRENT_SHAPE_UPDATE,
 	CURRENT_SHAPE_RESET,
+	CURRENT_SHAPE_ROTATE_RIGHT,
+	CURRENT_SHAPE_ROTATE_LEFT,
+	CURRENT_SHAPE_MOVE_DOWN,
+	CURRENT_SHAPE_MOVE_LEFT,
+	CURRENT_SHAPE_MOVE_RIGHT,
 } from '../constants/current-shape-constants'
 import { SHAPE_CELLS, COLS } from '../constants/dimention-constants'
-import {
-	MOVE_LEFT,
-	MOVE_RIGHT,
-	MOVE_DOWN,
-	ROTATE,
-} from '../constants/control-constants'
 import * as ShapeUtils from '../utils/shape-utils'
 
 const initialState = {
@@ -37,28 +36,35 @@ export default function currentShapeReducer(
 			}
 
 		// TODO тут можно сделать проверки на координатфы
-		case MOVE_LEFT:
+		case CURRENT_SHAPE_MOVE_LEFT:
 			return {
 				...state,
 				payload: { dx: state.dx - 1 },
 			}
 
-		case MOVE_RIGHT:
+		case CURRENT_SHAPE_MOVE_RIGHT:
 			return {
 				...state,
 				payload: { dx: state.dx + 1 },
 			}
 
-		case MOVE_DOWN:
+		case CURRENT_SHAPE_MOVE_DOWN:
 			return {
 				...state,
-				payload: { dx: state.dx + 1 },
+				payload: { dx: state.dy + 1 },
 			}
 
-		case ROTATE:
+		case CURRENT_SHAPE_ROTATE_LEFT:
 			return {
 				...state,
-				payload: { matrix: ShapeUtils.rotateRight(state.matrix) },
+				payload: { matrix: ShapeUtils.rotateLeft(payload.matrix) },
+				// payload: { matrix: ShapeUtils.rotateLeft(state.matrix)
+			}
+
+		case CURRENT_SHAPE_ROTATE_RIGHT:
+			return {
+				...state,
+				payload: { matrix: ShapeUtils.rotateRight(payload.matrix) },
 				// payload: { matrix: ShapeUtils.rotateLeft(state.matrix)
 			}
 

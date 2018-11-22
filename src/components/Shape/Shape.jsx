@@ -11,20 +11,11 @@ export default class Shape extends Component {
 				{matrix.map((line, coordY) => {
 					return line.map((status, coordX) => {
 						return (
-							<Cell
-								key={[coordX, coordY]}
-								dx={coordX}
-								dy={coordY}
-								status={status}
-							/>
+							<Cell key={[coordX, coordY]} dx={coordX} dy={coordY} status={status} />
 						)
 					})
 				})}
 			</Group>
 		)
-	}
-
-	randomShape = items => {
-		return items[Math.floor(Math.random() * items.length)]
 	}
 }

@@ -3,10 +3,8 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Group } from 'react-konva'
 import { actionBoardUpdate } from '../../actions/board-actions'
-import { COLS, ROWS, CELL } from '../../constants/dimention-constants'
 import { MARGIN } from '../../constants/dimention-constants'
 import Board from '../../components/Board'
-import GridLayout from '../../components/GridLayout'
 
 class BoardContainer extends Component {
 	render() {
