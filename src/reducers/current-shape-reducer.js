@@ -11,8 +11,8 @@ import { SHAPE_CELLS, COLS } from '../constants/dimention-constants'
 import * as ShapeUtils from '../utils/shape-utils'
 
 const initialState = {
-	dx: (COLS - SHAPE_CELLS) / 2,
-	dy: -1 * SHAPE_CELLS,
+	dx: Math.ceil((COLS - SHAPE_CELLS) / 2),
+	dy: 0,
 	alias: '',
 	angle: 0,
 	matrix: [],

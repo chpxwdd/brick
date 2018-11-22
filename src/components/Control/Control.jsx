@@ -3,7 +3,7 @@ import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/game-constants'
 import * as ShapeUtils from '../../utils/shape-utils'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
-import { CELL } from '../../constants/dimention-constants'
+import { CELL, ROWS, SHAPE_CELLS } from '../../constants/dimention-constants'
 
 export default class Control extends Component {
 	constructor(props) {
@@ -89,10 +89,10 @@ export default class Control extends Component {
 			case 'down':
 				_tp.moveDown(_tp.currentShape.dy)
 				break
-			case 'ctrl +  left':
+			case 'ctrl':
 				_tp.rotateLeft(_tp.currentShape.matrix)
 				break
-			case 'ctrl +  right':
+			case 'alt':
 				_tp.rotateRight(_tp.currentShape.matrix)
 				break
 			default:
@@ -106,14 +106,17 @@ export default class Control extends Component {
 	 */
 	stepDown() {
 		const _tp = this.props
-
-		if (_tp.currentShape.dy + CELL === ROWS) {
-			_tp.currentShapeUpdate(_tp.nextShape)
-			_tp.nextShapeReset()
+		console.log(_tp.currentShape.dy, ROWS)
+		if (_tp.currentShape.dy + SHAPE_CELLS >= ROWS) {
+			// const { matrix, alias, angle } = ShapeUtils.getShape()
+			_tp.currentShapeReset()
+			_tp.currentShapeUpdate({ ...ShapeUtils.getShape() })
+			_tp.nextShapeUpdate()
+		} else {
+			_tp.moveDown(_tp.currentShape.dy)
 		}
 		// мониторим смену фигуры <CurrentShape> при невозможности двигаться дальше
 		// _tp.currentShapeUpdate({ ..._tp.currentShape, dy: _tp.currentShape.dy + 1 })
-		_tp.moveDown(_tp.currentShape.dy)
 	}
 
 	calculateSpeed = speed => 1100 - speed * 100

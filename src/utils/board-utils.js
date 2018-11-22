@@ -10,3 +10,9 @@ export const boardDropLine = (board, dy) => {
 export const boardCheckShapePosition = (board, shape) => {
 	return board
 }
+
+export const checkColisions = (board, currentShape) => {
+	let colision = false
+
+	return colision
+}
