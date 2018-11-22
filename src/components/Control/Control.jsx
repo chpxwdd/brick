@@ -3,6 +3,7 @@ import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/game-constants'
 import * as ShapeUtils from '../../utils/shape-utils'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
+import { CELL } from '../../constants/dimention-constants'
 
 export default class Control extends Component {
 	constructor(props) {
@@ -65,7 +66,6 @@ export default class Control extends Component {
 	 */
 	stop = () => {
 		const _tp = this.props
-
 		clearInterval(this.state.interval)
 		_tp.gameUpdate(STOP)
 		_tp.processUpdate({ score: 0, speed: 1, lines: 0 })
@@ -77,31 +77,26 @@ export default class Control extends Component {
 		})
 	}
 
-	handleKeyboard = (e, key) => {
+	handleKeyboard = (key, e) => {
 		const _tp = this.props
 		switch (key) {
 			case 'left':
+				_tp.moveLeft(_tp.currentShape.dx)
 				break
 			case 'right':
+				_tp.moveRight(_tp.currentShape.dx)
 				break
 			case 'down':
+				_tp.moveDown(_tp.currentShape.dy)
 				break
-			case 'up':
-				_tp.currentShapeRotate()
-				// _tp.currentShapeUpdate({
-				// 	..._tp.currentShape,
-				// 	matrix: ShapeUtils.rotateRight(_tp.currentShape.matrix),
-				// })
+			case 'ctrl +  left':
+				_tp.rotateLeft(_tp.currentShape.matrix)
 				break
-			case 'enter':
-				break
-			case 'space':
-				break
-			case 'esc':
-				break
-			case 'pause':
+			case 'ctrl +  right':
+				_tp.rotateRight(_tp.currentShape.matrix)
 				break
 			default:
+				console.log(key, e)
 				return
 		}
 	}
@@ -111,10 +106,14 @@ export default class Control extends Component {
 	 */
 	stepDown() {
 		const _tp = this.props
-		// мониторим смену фигуры <CurrentShape> при невозможности двигаться дальше
-		_tp.currentShapeUpdate({ ..._tp.currentShape, dy: _tp.currentShape.dy + 1 })
 
-		// this.setState({ step: this.state.step + 1 })
+		if (_tp.currentShape.dy + CELL === _tp.board.ROWS) {
+			_tp.currentShapeUpdate(_tp.nextShape)
+			_tp.nextShapeReset()
+		}
+		// мониторим смену фигуры <CurrentShape> при невозможности двигаться дальше
+		// _tp.currentShapeUpdate({ ..._tp.currentShape, dy: _tp.currentShape.dy + 1 })
+		_tp.moveDown(_tp.currentShape.dy)
 	}
 
 	calculateSpeed = speed => 1100 - speed * 100

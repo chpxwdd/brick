@@ -54,15 +54,15 @@ const shapeMatrixConfig = alias => {
 	}
 }
 
-const getShapeConfigFromMatrix = source => {
-	let rows = source.length
-	let cols = source[0].length
-	let matrix = []
-	for (let row = 0; row < rows; row++) {
-		for (let col = 0; col < cols; col++) {}
-	}
-	return matrix
-}
+// const getShapeConfigFromMatrix = source => {
+// 	let rows = source.length
+// 	let cols = source[0].length
+// 	let matrix = []
+// 	for (let row = 0; row < rows; row++) {
+// 		for (let col = 0; col < cols; col++) {}
+// 	}
+// 	return matrix
+// }
 
 /**
  * поворачивает матрицу source против часовой стрелке

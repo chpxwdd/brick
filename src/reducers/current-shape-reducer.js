@@ -39,33 +39,31 @@ export default function currentShapeReducer(
 		case CURRENT_SHAPE_MOVE_LEFT:
 			return {
 				...state,
-				payload: { dx: state.dx - 1 },
+				dx: payload - 1,
 			}
 
 		case CURRENT_SHAPE_MOVE_RIGHT:
 			return {
 				...state,
-				payload: { dx: state.dx + 1 },
+				dx: payload + 1,
 			}
 
 		case CURRENT_SHAPE_MOVE_DOWN:
 			return {
 				...state,
-				payload: { dx: state.dy + 1 },
+				dy: payload + 1,
 			}
 
 		case CURRENT_SHAPE_ROTATE_LEFT:
 			return {
 				...state,
-				payload: { matrix: ShapeUtils.rotateLeft(payload.matrix) },
-				// payload: { matrix: ShapeUtils.rotateLeft(state.matrix)
+				matrix: ShapeUtils.rotateLeft(payload),
 			}
 
 		case CURRENT_SHAPE_ROTATE_RIGHT:
 			return {
 				...state,
-				payload: { matrix: ShapeUtils.rotateRight(payload.matrix) },
-				// payload: { matrix: ShapeUtils.rotateLeft(state.matrix)
+				matrix: ShapeUtils.rotateRight(payload),
 			}
 
 		default:

@@ -36,21 +36,21 @@ export const actionCurrentShapeMoveLeft = currentShape => {
 	}
 }
 
-export const actionCurrentShapeMoveDown = currentShape => {
+export const actionCurrentShapeMoveDown = dy => {
 	return {
 		type: CURRENT_SHAPE_MOVE_DOWN,
-		payload: currentShape,
+		payload: dy,
 	}
 }
-export const actionCurrentShapeRotateLeft = currentShape => {
+export const actionCurrentShapeRotateLeft = matrix => {
 	return {
 		type: CURRENT_SHAPE_ROTATE_LEFT,
-		payload: currentShape,
+		payload: matrix,
 	}
 }
-export const actionCurrentShapeRotateRight = currentShape => {
+export const actionCurrentShapeRotateRight = matrix => {
 	return {
 		type: CURRENT_SHAPE_ROTATE_RIGHT,
-		payload: currentShape,
+		payload: matrix,
 	}
 }
