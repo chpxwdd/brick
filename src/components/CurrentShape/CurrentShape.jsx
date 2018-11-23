@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Shape from '../Shape'
 import { Group } from 'react-konva'
+import { STOP } from '../../constants/game-constants'
 
 export default class CurrentShape extends Component {
 	constructor(props) {
@@ -16,6 +17,7 @@ export default class CurrentShape extends Component {
 	}
 
 	componentDidMount() {
+		console.log(this.props.game)
 		console.log('componentDidMount')
 		this.setState({
 			interval: setInterval(this.stepDown, 1000),
@@ -27,7 +29,10 @@ export default class CurrentShape extends Component {
 	componentDidUpdate() {
 		console.log('componentDidUpdate')
 	}
-	// shouldComponentUpdate() {		return false	}
+
+	shouldComponentUpdate() {
+		return this.props.game === STOP ? false : true
+	}
 
 	componentWillUnmount() {
 		clearInterval(this.state.interval)
@@ -36,7 +41,7 @@ export default class CurrentShape extends Component {
 	stepDown = () => {
 		this.props.moveDown(this.props.currentShape.dy)
 
-		this.state.currentShape.dy++
+		// this.state.currentShape.dy++
 
 		console.log(this.state.currentShape)
 	}
