@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/game-constants'
 import * as ShapeUtils from '../../utils/shape-utils'
+import * as BoardUtils from '../../utils/board-utils'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
 import { CELL, ROWS, SHAPE_CELLS } from '../../constants/dimention-constants'
 
@@ -9,20 +10,35 @@ export default class Control extends Component {
 	constructor(props) {
 		super(props)
 
-		this.state = {
-			interval: null,
-			step: 0,
-		}
+		// this.state = {
+		// 	status: 'STOP',
+		// 	interval: null,
+		// 	step: 0,
+		// }
 
 		this.run = this.run.bind(this)
 		this.pause = this.pause.bind(this)
 		this.resume = this.resume.bind(this)
 		this.stop = this.stop.bind(this)
-		this.stepDown = this.stepDown.bind(this)
+		// this.stepDown = this.stepDown.bind(this)
 		this.handleKeyboard = this.handleKeyboard.bind(this)
 	}
 
-	componentWillUnmount = () => this.clearInterval(this.state.interval)
+	// shouldComponentUpdate() {
+	// 	return false
+	// }
+
+	// componentWillUpdate = () => {
+	// 	console.log('componentWillUpdate')
+	// 	// BoardUtils.checkColisions(this.props.board, this.props.currentShape)
+	// }
+
+	// componentDidUpdate = () => {
+	// 	console.log('componentDidUpdate')
+	// 	// BoardUtils.checkColisions(this.props.board, this.props.currentShape)
+	// }
+
+	// componentWillUnmount = () => this.clearInterval(this.state.interval)
 
 	/**
 	 * run game
@@ -30,14 +46,14 @@ export default class Control extends Component {
 	run = () => {
 		const _tp = this.props
 
-		this.setState({
-			interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
-		})
+		// this.setState({
+		// 	interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
+		// })
 
 		const { matrix, alias, angle } = ShapeUtils.getShape()
 		_tp.currentShapeUpdate({ matrix: matrix, angle: angle, alias, alias })
 		_tp.nextShapeUpdate()
-		_tp.speedUpdate(1)
+		// _tp.speedUpdate(1)
 		_tp.gameUpdate(RUN)
 	}
 
@@ -45,9 +61,9 @@ export default class Control extends Component {
 	 * pause game
 	 */
 	pause = () => {
-		const _tp = this.props
-		_tp.gameUpdate(PAUSE)
-		clearInterval(this.state.interval)
+		// const _tp = this.props
+		this.props.gameUpdate(PAUSE)
+		// clearInterval(this.state.interval)
 	}
 
 	/**
@@ -55,10 +71,10 @@ export default class Control extends Component {
 	 */
 	resume = () => {
 		const _tp = this.props
-		_tp.gameUpdate(RUN)
-		this.setState({
-			interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
-		})
+		this.props.gameUpdate(RUN)
+		// this.setState({
+		// 	interval: setInterval(this.stepDown, this.calculateSpeed(_tp.process.speed)),
+		// })
 	}
 
 	/**
@@ -66,15 +82,15 @@ export default class Control extends Component {
 	 */
 	stop = () => {
 		const _tp = this.props
-		clearInterval(this.state.interval)
+		// clearInterval(this.state.interval)
 		_tp.gameUpdate(STOP)
 		_tp.processUpdate({ score: 0, speed: 1, lines: 0 })
 		_tp.currentShapeReset()
 		_tp.nextShapeReset()
-		this.setState({
-			step: 0,
-			interval: null,
-		})
+		// this.setState({
+		// 	step: 0,
+		// 	interval: null,
+		// })
 	}
 
 	handleKeyboard = (key, e) => {
@@ -89,14 +105,13 @@ export default class Control extends Component {
 			case 'down':
 				_tp.moveDown(_tp.currentShape.dy)
 				break
-			case 'ctrl':
+			case 'a':
 				_tp.rotateLeft(_tp.currentShape.matrix)
 				break
-			case 'alt':
+			case 'z':
 				_tp.rotateRight(_tp.currentShape.matrix)
 				break
 			default:
-				console.log(key, e)
 				return
 		}
 	}
@@ -104,20 +119,23 @@ export default class Control extends Component {
 	/**
 	 * ---------------------   ДВИЖОК ИГРЫ    --------------------------------
 	 */
-	stepDown() {
-		const _tp = this.props
-		console.log(_tp.currentShape.dy, ROWS)
-		if (_tp.currentShape.dy + SHAPE_CELLS >= ROWS) {
-			// const { matrix, alias, angle } = ShapeUtils.getShape()
-			_tp.currentShapeReset()
-			_tp.currentShapeUpdate({ ...ShapeUtils.getShape() })
-			_tp.nextShapeUpdate()
-		} else {
-			_tp.moveDown(_tp.currentShape.dy)
-		}
-		// мониторим смену фигуры <CurrentShape> при невозможности двигаться дальше
-		// _tp.currentShapeUpdate({ ..._tp.currentShape, dy: _tp.currentShape.dy + 1 })
-	}
+	// stepDown() {
+	// 	const _tp = this.props
+
+	// 	if (_tp.currentShape.dy + SHAPE_CELLS >= ROWS) {
+	// 		// const { matrix, alias, angle } = ShapeUtils.getShape()
+	// 		_tp.currentShapeReset()
+	// 		_tp.currentShapeUpdate({ ...ShapeUtils.getShape() })
+	// 		_tp.nextShapeUpdate()
+	// 	} else {
+	// 		_tp.moveDown(_tp.currentShape.dy)
+	// 	}
+
+	// 	console.log(BoardUtils.checkColisions(_tp.board, _tp.currentShape))
+
+	// 	// мониторим смену фигуры <CurrentShape> при невозможности двигаться дальше
+	// 	// _tp.currentShapeUpdate({ ..._tp.currentShape, dy: _tp.currentShape.dy + 1 })
+	// }
 
 	calculateSpeed = speed => 1100 - speed * 100
 
@@ -125,10 +143,6 @@ export default class Control extends Component {
 		const { game } = this.props
 		return (
 			<div>
-				{/* <KeyboardEventHandler
-					handleKeys={}
-					onKeyEvent={(e, key) => console.log(key, e)}
-				/> */}
 				<KeyboardEventHandler
 					handleKeys={['all']}
 					onKeyEvent={this.handleKeyboard}
@@ -153,8 +167,6 @@ export default class Control extends Component {
 						<Glyphicon glyph="stop" />
 					</Button>
 				</ButtonGroup>
-				<div>Loading{'...'.substr(0, (this.state.step % 3) + 1)}</div>
-				<div>{this.state.step}</div>
 			</div>
 		)
 	}

@@ -41,6 +41,7 @@ import {
 	BLOCK_BOARD,
 } from '../../constants/dimention-constants'
 import '../../index.css'
+import BoardContainer from '../BoardContainer/BoardContainer'
 
 class GameContainer extends Component {
 	render() {
@@ -55,7 +56,7 @@ class GameContainer extends Component {
 			moveLeft,
 			moveDown,
 			rotateLeft,
-			rotateRigh,
+			rotateRight,
 			currentShapeUpdate,
 			currentShapeReset,
 			nextShape,
@@ -68,7 +69,7 @@ class GameContainer extends Component {
 			linesUpdate,
 		} = this.props
 		return (
-			<div className={game}>
+			<div>
 				<Grid>
 					<Row>
 						<Col xs={12} style={{ margin: MARGIN }}>
@@ -82,8 +83,21 @@ class GameContainer extends Component {
 									<NextShape {...nextShape} />
 									<Process game={game} process={process} />
 									<Group x={dimentions(BLOCK_BOARD).x} y={dimentions(BLOCK_BOARD).y}>
-										<Board board={board} />
-										<CurrentShape {...currentShape} />
+										<BoardContainer />
+										{game === 'RUN' && (
+											<CurrentShape
+												currentShape={currentShape}
+												currentShapeUpdate={currentShapeUpdate}
+												currentShape={currentShape}
+												moveRight={moveRight}
+												moveLeft={moveLeft}
+												moveDown={moveDown}
+												rotateLeft={rotateLeft}
+												rotateRight={rotateRight}
+												currentShapeUpdate={currentShapeUpdate}
+												currentShapeReset={currentShapeReset}
+											/>
+										)}
 									</Group>
 								</Layer>
 							</Stage>
