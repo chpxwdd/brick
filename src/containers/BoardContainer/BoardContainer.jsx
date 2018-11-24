@@ -3,17 +3,16 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Group } from 'react-konva'
 import { actionBoardUpdate } from '../../actions/board-actions'
-import { COLS, ROWS, CELL } from '../../constants/dimention-constants'
 import { MARGIN } from '../../constants/dimention-constants'
 import Board from '../../components/Board'
-import GridLayout from '../../components/GridLayout'
+// import CurrentShape from '../../components/CurrentShape'
 
 class BoardContainer extends Component {
 	render() {
 		const { board, boardUpdate } = this.props
 
 		return (
-			<Group x={MARGIN} y={MARGIN}>
+			<Group>
 				<Board board={board} boardUpdate={boardUpdate} />
 			</Group>
 		)
@@ -23,6 +22,8 @@ class BoardContainer extends Component {
 const mapStateToProps = store => {
 	return {
 		board: store.board,
+		currentShape: store.currentShape,
+		game: store.game,
 	}
 }
 

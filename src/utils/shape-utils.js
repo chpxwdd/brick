@@ -21,10 +21,10 @@ export const getShape = (alias = null) => {
 			})
 		})
 	})
-	// console.log('base', shapeMatrix)
+	// console.log('source', shapeMatrix)
 	// console.log('transponse ', transponse(shapeMatrix))
 
-	return { alias: alias, matrix: shapeMatrix }
+	return { alias: alias, matrix: shapeMatrix, angle: 0 }
 }
 
 const shapeList = ['I', 'O', 'T', 'S', 'Z', 'L', 'J']
@@ -42,7 +42,7 @@ const shapeMatrixConfig = alias => {
 		case 'S':
 			return [[1, 1], [2, 1], [2, 2], [3, 2]]
 		case 'Z':
-			return [[2, 1], [3, 1], [1, 2], [2, 2]]
+			return [[1, 1], [2, 1], [3, 2], [2, 2]]
 		case 'L':
 			return [[1, 1], [1, 2], [2, 2], [3, 2]]
 		case 'J':
@@ -53,36 +53,47 @@ const shapeMatrixConfig = alias => {
 			return []
 	}
 }
-export const rotateLeft = base => {
-	console.log(base)
-	let m = base.length
-	let n = base[0].length
+
+// const getShapeConfigFromMatrix = source => {
+// 	let rows = source.length
+// 	let cols = source[0].length
+// 	let matrix = []
+// 	for (let row = 0; row < rows; row++) {
+// 		for (let col = 0; col < cols; col++) {}
+// 	}
+// 	return matrix
+// }
+
+/**
+ * поворачивает матрицу source против часовой стрелке
+ */
+export const rotateLeft = source => {
+	let rows = source.length
+	let cols = source[0].length
 	let matrix = []
-	for (let i = 0; i < m; i++) {
-		for (let j = 0; j < n; j++) {
-			if (!matrix[m - 1 - j]) {
-				matrix[m - 1 - j] = []
+	for (let row = 0; row < rows; row++) {
+		for (let col = 0; col < cols; col++) {
+			if (!matrix[rows - 1 - col]) {
+				matrix[rows - 1 - col] = []
 			}
-			matrix[m - 1 - j][i] = base[i][j]
+			matrix[rows - 1 - col][row] = source[row][col]
 		}
 	}
 	return matrix
 }
 
-export const rotateRight = base => {
-	console.log(base)
-	let m = base.length
-	let n = base[0].length
+/**
+ * поворачивает матрицу source по часовой стрелке против
+ */
+export const rotateRight = source => {
+	let rows = source.length
+	let cols = source[0].length
 	let matrix = []
-	for (let i = 0; i < m; i++) {
-		matrix[i] = []
-		for (let j = 0; j < n; j++) {
-			matrix[i][m - 1 - j] = base[j][i]
+	for (let row = 0; row < rows; row++) {
+		matrix[row] = []
+		for (let col = 0; col < cols; col++) {
+			matrix[row][rows - 1 - col] = source[col][row]
 		}
 	}
 	return matrix
-}
-
-export const moveShape = (shape, moveDirection) => {
-	return shape
 }

@@ -9,6 +9,11 @@ import {
 import {
 	actionCurrentShapeUpdate,
 	actionCurrentShapeReset,
+	actionCurrentShapeMoveRight,
+	actionCurrentShapeMoveLeft,
+	actionCurrentShapeMoveDown,
+	actionCurrentShapeRotateLeft,
+	actionCurrentShapeRotateRight,
 } from '../../actions/current-shape-actions'
 import {
 	actionBoardUpdate,
@@ -36,6 +41,8 @@ import {
 	BLOCK_BOARD,
 } from '../../constants/dimention-constants'
 import '../../index.css'
+import BoardContainer from '../BoardContainer/BoardContainer'
+import { STOP, PAUSE } from '../../constants/game-constants'
 
 class GameContainer extends Component {
 	render() {
@@ -46,6 +53,11 @@ class GameContainer extends Component {
 			boardUpdate,
 			boardReset,
 			currentShape,
+			moveRight,
+			moveLeft,
+			moveDown,
+			rotateLeft,
+			rotateRight,
 			currentShapeUpdate,
 			currentShapeReset,
 			nextShape,
@@ -58,7 +70,7 @@ class GameContainer extends Component {
 			linesUpdate,
 		} = this.props
 		return (
-			<div className={game}>
+			<div>
 				<Grid>
 					<Row>
 						<Col xs={12} style={{ margin: MARGIN }}>
@@ -72,8 +84,21 @@ class GameContainer extends Component {
 									<NextShape {...nextShape} />
 									<Process game={game} process={process} />
 									<Group x={dimentions(BLOCK_BOARD).x} y={dimentions(BLOCK_BOARD).y}>
-										<Board board={board} />
-										<CurrentShape {...currentShape} />
+										<BoardContainer />
+
+										<CurrentShape
+											game={game}
+											currentShape={currentShape}
+											currentShapeUpdate={currentShapeUpdate}
+											currentShape={currentShape}
+											moveRight={moveRight}
+											moveLeft={moveLeft}
+											moveDown={moveDown}
+											rotateLeft={rotateLeft}
+											rotateRight={rotateRight}
+											currentShapeUpdate={currentShapeUpdate}
+											currentShapeReset={currentShapeReset}
+										/>
 									</Group>
 								</Layer>
 							</Stage>
@@ -106,6 +131,11 @@ const mapDispatchToProps = dispatch => {
 		boardReset: bindActionCreators(actionBoardReset, dispatch),
 		nextShapeUpdate: bindActionCreators(actionNextShapeUpdate, dispatch),
 		nextShapeReset: bindActionCreators(actionNextShapeReset, dispatch),
+		moveRight: bindActionCreators(actionCurrentShapeMoveRight, dispatch),
+		moveLeft: bindActionCreators(actionCurrentShapeMoveLeft, dispatch),
+		moveDown: bindActionCreators(actionCurrentShapeMoveDown, dispatch),
+		rotateRight: bindActionCreators(actionCurrentShapeRotateRight, dispatch),
+		rotateLeft: bindActionCreators(actionCurrentShapeRotateLeft, dispatch),
 		currentShapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
 		currentShapeReset: bindActionCreators(actionCurrentShapeReset, dispatch),
 		processUpdate: bindActionCreators(actionProcessUpdate, dispatch),
@@ -119,4 +149,3 @@ export default connect(
 	mapStateToProps,
 	mapDispatchToProps
 )(GameContainer)
-// export default GameContainer
