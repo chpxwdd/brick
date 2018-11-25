@@ -1,74 +1,31 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionGameUpdate } from '../../actions/game-actions'
-import {
-	actionNextShapeUpdate,
-	actionNextShapeReset,
-} from '../../actions/next-shape-actions'
-import {
-	actionCurrentShapeUpdate,
-	actionCurrentShapeReset,
-	actionCurrentShapeMoveRight,
-	actionCurrentShapeMoveLeft,
-	actionCurrentShapeMoveDown,
-	actionCurrentShapeRotateLeft,
-	actionCurrentShapeRotateRight,
-} from '../../actions/current-shape-actions'
-import {
-	actionBoardUpdate,
-	actionBoardReset,
-} from '../../actions/board-actions'
-import {
-	actionProcessUpdate,
-	actionProcessUpdateLines,
-	actionProcessUpdateScore,
-	actionProcessUpdateSpeed,
-} from '../../actions/process-actions'
-import { Stage, Layer, Group } from 'react-konva'
+import * as gameActions from '../../actions/game-actions'
+import * as processActions from '../../actions/process-actions'
+import * as boardActions from '../../actions/board-actions'
+import * as currentShapeActions from '../../actions/current-shape-actions'
+import * as nextShapeActions from '../../actions/next-shape-actions'
+import { Stage, Layer, Group, Text } from 'react-konva'
 import { Grid, Row, Col } from 'react-bootstrap'
-import GridLayout from '../../components/GridLayout'
-import Control from '../../components/Control'
-import Process from '../../components/Process'
-import NextShape from '../../components/NextShape'
-import CurrentShape from '../../components/CurrentShape'
-import Board from '../../components/Board'
-import { dimentions } from '../../utils/utils'
 import {
 	MARGIN,
 	BLOCK_DISPLAY,
 	BLOCK_NEXT_SHAPE,
 	BLOCK_BOARD,
+	BLOCK_PROCESS,
 } from '../../constants/dimention-constants'
+import { dimentions } from '../../utils/utils'
 import '../../index.css'
-import BoardContainer from '../BoardContainer/BoardContainer'
-import { STOP, PAUSE } from '../../constants/game-constants'
+import GridLayout from '../../components/GridLayout'
+import BoardContainer from '../../containers/BoardContainer'
+import CurrentShapeContainer from '../../containers/CurrentShapeContainer'
+import NextShapeContainer from '../../containers/NextShapeContainer'
+import Control from '../../components/Control'
 
 class GameContainer extends Component {
 	render() {
-		const {
-			game,
-			gameUpdate,
-			board,
-			boardUpdate,
-			boardReset,
-			currentShape,
-			moveRight,
-			moveLeft,
-			moveDown,
-			rotateLeft,
-			rotateRight,
-			currentShapeUpdate,
-			currentShapeReset,
-			nextShape,
-			nextShapeUpdate,
-			nextShapeReset,
-			process,
-			processUpdate,
-			scoreUpdate,
-			speedUpdate,
-			linesUpdate,
-		} = this.props
+		const { game, gameUpdate, speed, score, lines } = this.props
 		return (
 			<div>
 				<Grid>
@@ -77,35 +34,31 @@ class GameContainer extends Component {
 							<Stage {...dimentions(BLOCK_DISPLAY)}>
 								<Layer>
 									<GridLayout {...dimentions(BLOCK_DISPLAY)} />
+									<Group x={dimentions(BLOCK_PROCESS).x} y={dimentions(BLOCK_PROCESS).y}>
+										<Text x={0} y={0} text="status" />
+										<Text x={50} y={0} text={game} />
+										<Text x={0} y={15} text="speed" />
+										<Text x={50} y={15} text={String(speed)} />
+										<Text x={0} y={30} text="lines" />
+										<Text x={50} y={30} text={String(lines)} />
+										<Text x={0} y={45} text="score" />
+										<Text x={50} y={45} text={String(score)} />
+									</Group>
+
 									<GridLayout {...dimentions(BLOCK_NEXT_SHAPE)} />
+									<Group x={dimentions(BLOCK_NEXT_SHAPE).x} y={dimentions(BLOCK_NEXT_SHAPE).y}>
+										<NextShapeContainer />
+									</Group>
+
 									<GridLayout {...dimentions(BLOCK_BOARD)} />
-								</Layer>
-								<Layer>
-									<NextShape {...nextShape} />
-									<Process game={game} process={process} />
 									<Group x={dimentions(BLOCK_BOARD).x} y={dimentions(BLOCK_BOARD).y}>
 										<BoardContainer />
-
-										<CurrentShape
-											game={game}
-											currentShape={currentShape}
-											currentShapeUpdate={currentShapeUpdate}
-											currentShape={currentShape}
-											moveRight={moveRight}
-											moveLeft={moveLeft}
-											moveDown={moveDown}
-											rotateLeft={rotateLeft}
-											rotateRight={rotateRight}
-											currentShapeUpdate={currentShapeUpdate}
-											currentShapeReset={currentShapeReset}
-										/>
+										<CurrentShapeContainer />
 									</Group>
 								</Layer>
 							</Stage>
-
 							<hr />
-							<Control {...this.props} />
-							<hr />
+							<Control gameUpdate={gameUpdate} game={game} />
 						</Col>
 					</Row>
 				</Grid>
@@ -117,31 +70,21 @@ class GameContainer extends Component {
 const mapStateToProps = store => {
 	return {
 		game: store.game,
-		process: store.process,
-		board: store.board,
-		nextShape: store.nextShape,
-		currentShape: store.currentShape,
+		speed: store.process.speed,
+		score: store.process.score,
+		lines: store.process.lines,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		gameUpdate: bindActionCreators(actionGameUpdate, dispatch),
-		boardUpdate: bindActionCreators(actionBoardUpdate, dispatch),
-		boardReset: bindActionCreators(actionBoardReset, dispatch),
-		nextShapeUpdate: bindActionCreators(actionNextShapeUpdate, dispatch),
-		nextShapeReset: bindActionCreators(actionNextShapeReset, dispatch),
-		moveRight: bindActionCreators(actionCurrentShapeMoveRight, dispatch),
-		moveLeft: bindActionCreators(actionCurrentShapeMoveLeft, dispatch),
-		moveDown: bindActionCreators(actionCurrentShapeMoveDown, dispatch),
-		rotateRight: bindActionCreators(actionCurrentShapeRotateRight, dispatch),
-		rotateLeft: bindActionCreators(actionCurrentShapeRotateLeft, dispatch),
-		currentShapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
-		currentShapeReset: bindActionCreators(actionCurrentShapeReset, dispatch),
-		processUpdate: bindActionCreators(actionProcessUpdate, dispatch),
-		speedUpdate: bindActionCreators(actionProcessUpdateSpeed, dispatch),
-		scoreUpdate: bindActionCreators(actionProcessUpdateScore, dispatch),
-		linesUpdate: bindActionCreators(actionProcessUpdateLines, dispatch),
+		gameUpdate: bindActionCreators(gameActions.actionGameUpdate, dispatch),
+		// speedUpdate: bindActionCreators(processActions.actionProcessUpdateSpeed, dispatch),
+		// scoreUpdate: bindActionCreators(processActions.actionProcessUpdateScore, dispatch),
+		// linesUpdate: bindActionCreators(processActions.actionProcessUpdateLines, dispatch),
+		// boardUpdate: bindActionCreators(boardActions.actionBoardUpdate, dispatch),
+		// nextShapeUpdate: bindActionCreators(nextShapeActions.actionNextShapeUpdate, dispatch),
+		// currentShapeUpdate: bindActionCreators(currentShapeActions.actionCurrentShapeUpdate, dispatch),
 	}
 }
 

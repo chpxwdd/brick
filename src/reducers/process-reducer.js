@@ -6,15 +6,12 @@ import {
 } from '../constants/process-constants'
 
 const initialState = {
-	speed: 1,
+	speed: 1000,
 	score: 0,
 	lines: 0,
 }
 
-export default function processReducer(
-	state = initialState,
-	{ type, payload }
-) {
+export default function processReducer(state = initialState, { type, payload }) {
 	switch (type) {
 		case PROCESS_UPDATE:
 			return {

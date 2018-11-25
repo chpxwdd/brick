@@ -13,15 +13,10 @@ import * as ShapeUtils from '../utils/shape-utils'
 const initialState = {
 	dx: Math.ceil((COLS - SHAPE_CELLS) / 2),
 	dy: 0,
-	alias: '',
-	angle: 0,
 	matrix: [],
 }
 
-export default function currentShapeReducer(
-	state = initialState,
-	{ type, payload }
-) {
+export default function currentShapeReducer(state = initialState, { type, payload }) {
 	switch (type) {
 		case CURRENT_SHAPE_UPDATE:
 			return {
