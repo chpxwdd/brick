@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { Group, Text } from 'react-konva'
 export default class Process extends Component {
 	render() {
-		const { game, speed, score, lines } = this.props
+		const { x, y, speed, score, lines } = this.props
 		return (
-			<Group>
-				<Text x={0} y={0} text="status" />
-				<Text x={50} y={0} text={game} />
+			<Group x={x} y={y}>
+				{/* <Text x={0} y={0} text="status" />
+				<Text x={50} y={0} text={game} /> */}
 				<Text x={0} y={15} text="speed" />
 				<Text x={50} y={15} text={String(speed)} />
 				<Text x={0} y={30} text="lines" />

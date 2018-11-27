@@ -2,51 +2,29 @@ import React, { Component } from 'react'
 import Shape from '../Shape'
 import KeyboardEventHandler from 'react-keyboard-event-handler'
 import { Group } from 'react-konva'
-import { STOP, RUN, PAUSE } from '../../constants/game-constants'
 
 export default class CurrentShape extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			interval: null,
-			step: 0,
-			coords: [],
+			angle: 0,
 		}
 		this.handleKeyboard = this.handleKeyboard.bind(this)
 	}
 
-	componentDidMount() {
-		this.setState({
-			interval: setInterval(this.iterator, this.props.speed),
-		})
-	}
+	componentDidMount() {}
 
 	// componentWillMount(){}
-	componentDidUpdate() {
-		// if (this.props.game == STOP || this.props.game == PAUSE) {
-		// 	this.setState({
-		// 		interval: setInterval(this.iterator, this.props.speed),
-		// 	})
-		// }
+	componentDidUpdate() {}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return true
+		// 	// если невозможно сделать ход
+		// 	console.log('<currentShape/>', 'shouldComponentUpdate')
+		// 	return this.props.game == STOP || this.props.game == PAUSE
 	}
 
-	// shouldComponentUpdate(nextProps, nextState) {
-	// 	// если невозможно сделать ход
-	// 	console.log('<currentShape/>', 'shouldComponentUpdate')
-	// 	return this.props.game == STOP || this.props.game == PAUSE
-	// }
-
-	componentWillUnmount() {
-		clearInterval(this.state.interval)
-	}
-
-	iterator = () => {
-		if (this.props.game === RUN) {
-			this.setState({ step: this.state.step + 1 })
-			this.props.moveDown(this.props.dy)
-			console.log('step ' + this.state.step)
-		}
-	}
+	componentWillUnmount() {}
 
 	handleKeyboard = (key, e) => {
 		const _tp = this.props

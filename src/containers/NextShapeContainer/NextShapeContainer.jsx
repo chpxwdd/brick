@@ -7,22 +7,30 @@ import NextShape from '../../components/NextShape'
 
 class NextShapeContainer extends Component {
 	render() {
-		return <NextShape {...this.props} />
+		const { /*updateNextShape,*/ currentShape, updateCurrentShape } = this.props
+		return (
+			<NextShape
+				// updateNextShape={updateNextShape}
+				updateCurrentShape={updateCurrentShape}
+				currentShape={currentShape}
+			/>
+		)
 	}
 }
 
 const mapStateToProps = store => {
 	return {
-		dx: store.nextShape.dx,
-		dy: store.nextShape.dy,
-		matrix: store.nextShape.matrix,
+		currentShape: store.currentShape,
+		// dx: store.nextShape.dx,
+		// dy: store.nextShape.dy,
+		// matrix: store.nextShape.matrix,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		nextShapeUpdate: bindActionCreators(actionNextShapeUpdate, dispatch),
-		currentShapeUpdate: bindActionCreators(actionCurrentShapeUpdate, dispatch),
+		// updateNextShape: bindActionCreators(actionNextShapeUpdate, dispatch),
+		updateCurrentShape: bindActionCreators(actionCurrentShapeUpdate, dispatch),
 	}
 }
 

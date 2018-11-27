@@ -2,7 +2,7 @@ import {
 	NEXT_SHAPE_UPDATE,
 	NEXT_SHAPE_RESET,
 } from '../constants/next-shape-constants'
-const initialState = { dx: 0, dy: 0, matrix: [], alias: '', angle: 0 }
+const initialState = { dx: 0, dy: 0, matrix: []}
 
 export default function nextShapeReducer(
 	state = initialState,
