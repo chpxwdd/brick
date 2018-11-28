@@ -3,35 +3,32 @@ import { Button, ButtonGroup, Glyphicon } from 'react-bootstrap'
 import { RUN, STOP, PAUSE } from '../../constants/game-constants'
 
 export default class Control extends Component {
-	constructor(props) {
-		super(props)
-		this.run = this.run.bind(this)
-		this.pause = this.pause.bind(this)
-		this.resume = this.resume.bind(this)
-		this.stop = this.stop.bind(this)
-	}
-
-	run = () => this.props.gameUpdate(RUN)
-	pause = () => this.props.gameUpdate(PAUSE)
-	resume = () => this.props.gameUpdate(RUN)
-	stop = () => this.props.gameUpdate(STOP)
-
 	render() {
 		const { game } = this.props
 		return (
 			<div>
-				<ButtonGroup bsSize="sm">
-					<Button onClick={this.run} disabled={game === RUN || game == PAUSE} bsStyle={game === RUN ? 'success' : 'default'}>
+				<ButtonGroup bsSize="lg">
+					<Button
+						onClick={() => this.props.updateGame(RUN)}
+						disabled={game === RUN || game == PAUSE}
+						bsStyle={game === RUN ? 'success' : 'default'}
+					>
 						<Glyphicon glyph="play" />
 					</Button>
 					<Button
-						onClick={game === PAUSE ? this.resume : this.pause}
+						onClick={() => {
+							game === PAUSE ? this.props.updateGame(RUN) : this.props.updateGame(PAUSE)
+						}}
 						disabled={game === STOP}
 						bsStyle={game === PAUSE ? 'primary' : 'default'}
 					>
 						<Glyphicon glyph="pause" />
 					</Button>
-					<Button onClick={this.stop} disabled={game === STOP} bsStyle="default">
+					<Button
+						onClick={() => this.props.updateGame(STOP)}
+						disabled={game === STOP}
+						bsStyle={game === RUN || game === PAUSE ? 'danger' : 'default'}
+					>
 						<Glyphicon glyph="stop" />
 					</Button>
 				</ButtonGroup>

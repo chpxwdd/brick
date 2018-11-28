@@ -6,25 +6,9 @@ import { Group } from 'react-konva'
 export default class CurrentShape extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			angle: 0,
-		}
+		
 		this.handleKeyboard = this.handleKeyboard.bind(this)
 	}
-
-	componentDidMount() {}
-
-	// componentWillMount(){}
-	componentDidUpdate() {}
-
-	shouldComponentUpdate(nextProps, nextState) {
-		return true
-		// 	// если невозможно сделать ход
-		// 	console.log('<currentShape/>', 'shouldComponentUpdate')
-		// 	return this.props.game == STOP || this.props.game == PAUSE
-	}
-
-	componentWillUnmount() {}
 
 	handleKeyboard = (key, e) => {
 		const _tp = this.props

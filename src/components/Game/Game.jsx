@@ -7,17 +7,67 @@ import BoardContainer from '../../containers/BoardContainer'
 import CurrentShapeContainer from '../../containers/CurrentShapeContainer'
 import NextShapeContainer from '../../containers/NextShapeContainer'
 import ProcessContainer from '../../containers/ProcessContainer'
-import { STOP } from '../../constants/game-constants'
+import { RUN, PAUSE, STOP } from '../../constants/game-constants'
 
 export default class Game extends Component {
-	// constructor(props) {		super(props)
-	// 		this.state = { lines: 0, score: 0, speed: null }
-	// }
-	// componentDidMount() {		console.log('Game componentDidMount')	}
-	// componentWillUpdate() {		console.log('Game componentWillUpdate')	}
-	// componentWillReceiveProps() {		console.log('Game componentWillReceiveProps')	}
-	// componentDidUpdate() {		console.log('Game componentDidUpdate')	}
-	// componentWillUnmount() {		console.log('Game componentWillUnmount')	}
+	constructor(props) {
+		super(props)
+		this.state = { interval: null }
+	}
+
+	// componentWillMount() {	}
+	componentDidMount() {
+		this.setState({
+			interval: setInterval(() => {
+				this.loop()
+			}, 1100 - 100 * this.props.process.speed),
+		})
+	}
+
+	componentWillUpdate() {
+		console.log('Game componentWillUpdate')
+	}
+
+	componentDidUpdate() {
+		console.log('Game componentDidUpdate')
+	}
+
+	componentWillUnmount() {
+		console.log('Game componentWillUnmount')
+		clearInterval(this.state.interval)
+	}
+
+	loop = () => {
+		if (this.props.game !== RUN) {
+			return
+		}
+		this.props.moveDown(this.props.currentShape.dy)
+	}
+
+	renderBoard() {
+		return (
+			<Group x={dimentions(BLOCK_BOARD).x} y={dimentions(BLOCK_BOARD).y}>
+				<BoardContainer />
+				<CurrentShapeContainer />
+			</Group>
+		)
+	}
+
+	renderNextShape() {
+		return (
+			<Group x={dimentions(BLOCK_NEXT_SHAPE).x} y={dimentions(BLOCK_NEXT_SHAPE).y}>
+				<NextShapeContainer />
+			</Group>
+		)
+	}
+
+	renderProcess() {
+		return (
+			<Group x={dimentions(BLOCK_PROCESS).x} y={dimentions(BLOCK_PROCESS).y}>
+				<ProcessContainer />
+			</Group>
+		)
+	}
 
 	render() {
 		return (
@@ -29,16 +79,9 @@ export default class Game extends Component {
 				</Layer>
 				{this.props.game !== STOP && (
 					<Layer>
-						<Group x={dimentions(BLOCK_PROCESS).x} y={dimentions(BLOCK_PROCESS).y}>
-							<ProcessContainer />
-						</Group>
-						<Group x={dimentions(BLOCK_NEXT_SHAPE).x} y={dimentions(BLOCK_NEXT_SHAPE).y}>
-							<NextShapeContainer />
-						</Group>
-						<Group x={dimentions(BLOCK_BOARD).x} y={dimentions(BLOCK_BOARD).y}>
-							<BoardContainer />
-							<CurrentShapeContainer />
-						</Group>
+						{this.renderProcess()}
+						{this.renderNextShape()}
+						{this.renderBoard()}
 					</Layer>
 				)}
 			</Stage>

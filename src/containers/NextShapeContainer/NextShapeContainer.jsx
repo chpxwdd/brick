@@ -1,36 +1,27 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import { actionNextShapeUpdate } from '../../actions/next-shape-actions'
-import { actionCurrentShapeUpdate } from '../../actions/current-shape-actions'
+import * as currentShapeActions from '../../actions/current-shape-actions'
+import * as nextShapeActions from '../../actions/next-shape-actions'
 import NextShape from '../../components/NextShape'
 
 class NextShapeContainer extends Component {
 	render() {
-		const { /*updateNextShape,*/ currentShape, updateCurrentShape } = this.props
-		return (
-			<NextShape
-				// updateNextShape={updateNextShape}
-				updateCurrentShape={updateCurrentShape}
-				currentShape={currentShape}
-			/>
-		)
+		return <NextShape {...this.props} />
 	}
 }
 
 const mapStateToProps = store => {
 	return {
+		nextShape: store.nextShape,
 		currentShape: store.currentShape,
-		// dx: store.nextShape.dx,
-		// dy: store.nextShape.dy,
-		// matrix: store.nextShape.matrix,
 	}
 }
 
 const mapDispatchToProps = dispatch => {
 	return {
-		// updateNextShape: bindActionCreators(actionNextShapeUpdate, dispatch),
-		updateCurrentShape: bindActionCreators(actionCurrentShapeUpdate, dispatch),
+		updateCurrentShape: bindActionCreators(currentShapeActions.actionCurrentShapeUpdate, dispatch),
+		updateNextShape: bindActionCreators(nextShapeActions.actionNextShapeUpdate, dispatch),
 	}
 }
 

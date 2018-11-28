@@ -8,8 +8,9 @@ import * as gameActions from '../../actions/game-actions'
 import * as currentShapeActions from '../../actions/current-shape-actions'
 import * as nextShapeActions from '../../actions/next-shape-actions'
 import * as processActions from '../../actions/process-actions'
+
 import Game from '../../components/Game'
-class GameContainer extends Component {
+class TetrisContainer extends Component {
 	render() {
 		const { game, updateGame } = this.props
 		return (
