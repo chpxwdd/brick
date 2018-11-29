@@ -19,7 +19,13 @@ export default class NextShape extends Component {
 		this.props.updateCurrentShape({ matrix: ShapeUtils.getShape().matrix })
 	}
 
-	componentDidUpdate() {}
+	componentWillReceiveProps(nextProps) {
+		console.log('NextShape componentWillReceiveProps(nextProps) ->', nextProps)
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		this.props.updateCurrentShape({ matrix: this.state })
+	}
 
 	render() {
 		// const { matrix } = this.state

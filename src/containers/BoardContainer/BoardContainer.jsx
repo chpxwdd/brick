@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actionBoardUpdate } from '../../actions/board-actions'
 import * as currentShapeActions from '../../actions/current-shape-actions'
+import * as nextShapeActions from '../../actions/next-shape-actions'
 import Board from '../../components/Board'
 
 class BoardContainer extends Component {

@@ -21,7 +21,7 @@ export default function currentShapeReducer(state = initialState, { type, payloa
 		case CURRENT_SHAPE_UPDATE:
 			return {
 				...state,
-				...payload,
+				payload,
 			}
 
 		case CURRENT_SHAPE_RESET:

@@ -1,13 +1,10 @@
-import {
-	NEXT_SHAPE_UPDATE,
-	NEXT_SHAPE_RESET,
-} from '../constants/next-shape-constants'
-const initialState = { dx: 0, dy: 0, matrix: []}
+import { NEXT_SHAPE_UPDATE, NEXT_SHAPE_RESET } from '../constants/next-shape-constants'
 
-export default function nextShapeReducer(
-	state = initialState,
-	{ type, payload }
-) {
+import * as ShapeUtils from '../utils/shape-utils'
+
+const initialState = { dx: 0, dy: 0, matrix: [] }
+
+export default function nextShapeReducer(state = initialState, { type, payload }) {
 	switch (type) {
 		case NEXT_SHAPE_UPDATE:
 			return {
@@ -15,9 +12,10 @@ export default function nextShapeReducer(
 				...payload,
 			}
 		case NEXT_SHAPE_RESET:
+			let shape = ShapeUtils.getShape()
 			return {
 				...state,
-				...initialState,
+				shape,
 			}
 
 		default:

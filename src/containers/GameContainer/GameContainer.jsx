@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { Grid, Row, Col } from 'react-bootstrap'
-import Control from '../../components/Control'
 import * as boardActions from '../../actions/board-actions'
 import * as gameActions from '../../actions/game-actions'
 import * as currentShapeActions from '../../actions/current-shape-actions'
 import * as nextShapeActions from '../../actions/next-shape-actions'
 import * as processActions from '../../actions/process-actions'
 import Game from '../../components/Game'
+import Control from '../../components/Control'
+
 class GameContainer extends Component {
 	render() {
 		const { game, updateGame } = this.props
