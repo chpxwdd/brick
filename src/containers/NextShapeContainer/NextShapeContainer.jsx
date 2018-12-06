@@ -13,6 +13,7 @@ class NextShapeContainer extends Component {
 
 const mapStateToProps = store => {
 	return {
+		board: store.board,
 		nextShape: store.nextShape,
 		currentShape: store.currentShape,
 	}

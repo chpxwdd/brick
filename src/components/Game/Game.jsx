@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Stage, Layer, Group } from 'react-konva'
+import { Stage, Layer, Group, Text, Rect } from 'react-konva'
 import { dimentions } from '../../utils/utils'
 import {
 	BLOCK_DISPLAY,
@@ -8,20 +8,26 @@ import {
 	BLOCK_PROCESS,
 	ROWS,
 	SHAPE_CELLS,
+	MARGIN,
+	DARK,
 } from '../../constants/dimention-constants'
 import GridLayout from '../../components/GridLayout'
 import BoardContainer from '../../containers/BoardContainer'
 import CurrentShapeContainer from '../../containers/CurrentShapeContainer'
 import NextShapeContainer from '../../containers/NextShapeContainer'
 import ProcessContainer from '../../containers/ProcessContainer'
-import { RUN, PAUSE, STOP } from '../../constants/game-constants'
+import I from '../Shape/I'
 
 export default class Game extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { interval: null, renderCurrentShape: false }
+		this.state = {
+			interval: null,
+			positions: [],
+			shape: [],
+		}
 	}
-	// componentWillMount() {	}
+
 	componentDidMount() {
 		this.setState({
 			interval: setInterval(() => {
@@ -30,10 +36,19 @@ export default class Game extends Component {
 		})
 	}
 
-	// componentWillUpdate() {console.log('Game componentWillUpdate')}
-	// componentDidUpdate() {console.log('Game componentDidUpdate')}
+	shouldComponentUpdate(nextProps, nextState) {
+		if (nextProps.game === this.props.game) {
+			return false
+		}
+
+		return true
+	}
+
+	componentDidUpdate(nextProps, nextState) {
+		console.log('Game componentDidUpdate')
+	}
+
 	componentWillUnmount() {
-		// console.log('Game componentWillUnmount')
 		clearInterval(this.state.interval)
 	}
 
@@ -41,12 +56,6 @@ export default class Game extends Component {
 		if (this.props.game !== RUN) {
 			return
 		}
-
-		if (this.props.currentShape.dy == ROWS - SHAPE_CELLS) {
-			this.props.resetNextShape()
-			return
-		}
-
 		this.props.moveDown(this.props.currentShape.dy)
 	}
 
@@ -57,6 +66,9 @@ export default class Game extends Component {
 					<GridLayout {...dimentions(BLOCK_DISPLAY)} />
 					<GridLayout {...dimentions(BLOCK_NEXT_SHAPE)} />
 					<GridLayout {...dimentions(BLOCK_BOARD)} />
+				</Layer>
+				<Layer>
+					<I />
 				</Layer>
 				{this.props.game !== STOP && (
 					<Layer>

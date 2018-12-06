@@ -2,7 +2,7 @@ import { NEXT_SHAPE_UPDATE, NEXT_SHAPE_RESET } from '../constants/next-shape-con
 
 import * as ShapeUtils from '../utils/shape-utils'
 
-const initialState = { dx: 0, dy: 0, matrix: [] }
+const initialState = { dx: 0, dy: 0, matrix: ShapeUtils.getShape().matrix }
 
 export default function nextShapeReducer(state = initialState, { type, payload }) {
 	switch (type) {

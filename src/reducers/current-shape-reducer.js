@@ -13,7 +13,7 @@ import * as ShapeUtils from '../utils/shape-utils'
 const initialState = {
 	dx: Math.ceil((COLS - SHAPE_CELLS) / 2),
 	dy: 0,
-	matrix: [],
+	matrix: ShapeUtils.getShape().matrix,
 }
 
 export default function currentShapeReducer(state = initialState, { type, payload }) {

@@ -3,6 +3,23 @@ import { Group } from 'react-konva'
 import Cell from '../Cell'
 
 export default class Board extends Component {
+	componentDidMount() {
+		console.log('<Board/> componentDidMount')
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		if (nextProps.board === this.props.board) {
+			console.log('<Board/> shouldComponentUpdate -> FALSE')
+			return false
+		}
+		console.log('<Board/> shouldComponentUpdate -> TRUE')
+		return true
+	}
+
+	componentDidUpdate(prevProps, prevState) {
+		console.log('<Board/> componentDidUpdate')
+	}
+
 	render() {
 		return (
 			<Group>

@@ -1,4 +1,4 @@
-import { matrix, matrixPairs } from './utils'
+import { matrixPairs } from './utils'
 
 import { SHAPE_CELLS } from '../constants/dimention-constants'
 

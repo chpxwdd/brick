@@ -10,7 +10,7 @@ export default class Control extends Component {
 				<ButtonGroup bsSize="lg">
 					<Button
 						onClick={() => this.props.updateGame(RUN)}
-						disabled={game === RUN || game == PAUSE}
+						disabled={game === RUN || game === PAUSE}
 						bsStyle={game === RUN ? 'success' : 'default'}
 					>
 						<Glyphicon glyph="play" />

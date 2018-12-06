@@ -1,35 +1,28 @@
 import React, { Component } from 'react'
 import Shape from '../Shape'
-
-import * as ShapeUtils from '../../utils/shape-utils'
-
 export default class NextShape extends Component {
-	constructor(props) {
-		super(props)
-		this.state = { matrix: [] }
-	}
-
-	//
+	// при монтировании создаем фигуру для второго прохода итерации
 	componentDidMount() {
-		// const matrix = ShapeUtils.getShape().matrix
-		// this.props.updateCurrentShape({ matrix: ShapeUtils.getShape().matrix })
-		// this.setState((state, props) => {
-		// 	return { matrix: ShapeUtils.getShape().matrix }
-		// })
-		this.props.updateCurrentShape({ matrix: ShapeUtils.getShape().matrix })
+		console.log('<NextShape/> componentDidMount')
+		console.log('<NextShape/>', this.props)
+		// this.props.updateNextShape({ matrix: ShapeUtils.getShape().matrix })
 	}
 
-	componentWillReceiveProps(nextProps) {
-		console.log('NextShape componentWillReceiveProps(nextProps) ->', nextProps)
-	}
+	// shouldComponentUpdate(nextProps, nextState) {
+	// if (this.props.board === nextProps.board) {
+	// 	console.log('<NextShape/> shouldComponentUpdate -> FALSE')
+	// 	return false
+	// }
+	// console.log('<NextShape/> shouldComponentUpdate -> TRUE')
+	// return true
+	// }
 
-	componentDidUpdate(prevProps, prevState) {
-		this.props.updateCurrentShape({ matrix: this.state })
-	}
+	// componentDidUpdate(prevProps, prevState) {
+	// console.log('<NextShape/> componentDidUpdate -> TRUE')
+	// this.props.updateCurrentShape({ ...prevProps.nextShape })
+	// }
 
 	render() {
-		// const { matrix } = this.state
-		const { matrix } = this.props.nextShape
-		return <Shape matrix={matrix} />
+		return <Shape {...this.props.nextShape} />
 	}
 }

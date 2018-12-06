@@ -9,7 +9,7 @@ export const actionBoardUpdate = board => {
 
 export const actionBoardReset = board => {
 	return {
-		type: 'BOARD_RESET',
+		type: BOARD_RESET,
 		payload: board,
 	}
 }
